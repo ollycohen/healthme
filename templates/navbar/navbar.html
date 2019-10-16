@@ -6,16 +6,16 @@
     <!-- Materialize resources -->
 
     <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js"
+            integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 
     <!--  Materialize inits -->
@@ -23,11 +23,12 @@
           $(document).ready(function(){
             $('.tabs').tabs();
           });
+
     </script>
 
-  <!--  code for materializecss-form package -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <script>
+    <!--  code for materializecss-form package -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
   $(document).ready(function(){
 
     // Initialize materialize data picker
@@ -35,22 +36,40 @@
     $('select').formSelect();
 
   });
-  </script>
+
+    </script>
 </head>
 <body>
-  <nav>
-    <div class="nav-wrapper teal darken-3">
-      <a href="#" class="brand-logo">HealthMe</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <!-- only display other options if user is logged in -->
-        {% if user.is_authenticated %}
-          <li><a href="/">Home</a></li>
-          <li><a href="/workouts/add">Add Workout</a></li>
-          <li><a href="/workouts/view">View Workouts</a></li>
-          <li><a href="/auth/logout">Logout</a></li>
+{% if messages %}
+<ul class="messages center">
+    {% for message in messages %}
+            <li class="{{ message.tags }} message">{{ message }}</li>
+    {% endfor %}
+     {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li class="error message">{{field.label}}: {{ error|escape }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li class="error message">{{ error|escape }}</li>
+            {% endfor %}
         {% endif %}
-      </ul>
+</ul>
+{% endif %}
+<nav>
+    <div class="nav-wrapper teal darken-3">
+        <a href="#" class="brand-logo">HealthMe</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <!-- only display other options if user is logged in -->
+            {% if user.is_authenticated %}
+            <li><a href="/">Home</a></li>
+            <li><a href="/workouts/add">Add Workout</a></li>
+            <li><a href="/workouts/view">View Workouts</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+            {% endif %}
+        </ul>
     </div>
-  </nav>
+</nav>
 </body>
 </html>
