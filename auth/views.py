@@ -3,8 +3,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
-from django.contrib import messages
-
 # a lot of code for authentication taken from https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
 
 # doing signup in auth instead
@@ -16,6 +14,7 @@ def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            print("VALID FORM!")
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -26,10 +25,12 @@ def signup(request):
                 return HttpResponseRedirect(request.GET.get('next'))
             else:
                 return render(request, '/home/home.html', {})
+        else:
+            print("INVALID FORM")
     else:
+        print("NO POST")
         form = UserCreationForm()
 
-    messages.error(request, "There was an error with your signup form" )
     return render(request, 'auth/signup.html', {'form': form})
 def login(request):
 
@@ -44,5 +45,4 @@ def login(request):
     else:
         form = AuthenticationForm(request)
 
-    messages.error(request, "There was an error with your login form" )
     return render(request, 'auth/login.html', {'form': form})

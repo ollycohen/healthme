@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from django.contrib.messages import constants as message_constants
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -133,6 +131,3 @@ STATIC_URL = '/static/'
 # set redirect when user hits logout
 LOGOUT_REDIRECT_URL = "/auth/login"
 LOGIN_REDIRECT_URL = "/"
-
-# set message level that displays
-MESSAGE_LEVEL = message_constants.DEBUG
