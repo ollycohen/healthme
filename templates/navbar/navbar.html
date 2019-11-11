@@ -38,6 +38,24 @@
   </script>
 </head>
 <body>
+{% if messages %}
+<ul class="messages center">
+    {% for message in messages %}
+            <li class="{{ message.tags }} message">{{ message }}</li>
+    {% endfor %}
+     {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li class="error message">{{field.label}}: {{ error|escape }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li class="error message">{{ error|escape }}</li>
+            {% endfor %}
+        {% endif %}
+      </ul>
+</ul>
+{% endif %}
   <nav>
     <div class="nav-wrapper teal darken-3">
       <a href="#" class="brand-logo">HealthMe</a>

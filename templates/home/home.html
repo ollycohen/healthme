@@ -1,1 +1,15 @@
 {% include "navbar/navbar.html"%}
+
+<div class="row">
+    <div class="col s8 offset-s2">
+        <h2 class="center">Welcome to HealthMe!</h2>
+        <h5 class="center">The Application Designed to Optimize Your Health</h5>
+        {% if workouts.count < 5 %}
+            <p class="center">Come back for some insights once you have over 5 workouts recorded!</p>
+        {% else %}
+            <h6 class="center">Insights</h6>
+            <p>Total workouts : {{ workouts.count }}</p>
+            <p>Workout Success Ratio: {{ success_ratio|floatformat:2 }} </p>
+        {% endif %}
+    </div>
+</div>
