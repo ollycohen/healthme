@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
 
+    <!-- d3js imports for graphs -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link href="nv.d3.min.css" rel="stylesheet">
+    <script src="nv.d3.min.js"></script>
+
+
     <!-- Materialize resources -->
 
     <!-- Compiled and minified CSS -->
@@ -45,8 +51,8 @@
         <!-- only display other options if user is logged in -->
         {% if user.is_authenticated %}
           <li><a href="/">Home</a></li>
-          <li><a href="/workouts/add">Add Workout</a></li>
-          <li><a href="/workouts/view">View Workouts</a></li>
+          <li><a href="/workouts/add">Add </a></li>
+          <li><a href="/workouts/view">View </a></li>
           <li><a href="/auth/logout">Logout</a></li>
         {% endif %}
       </ul>

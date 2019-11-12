@@ -48,5 +48,6 @@ def view_workouts(request):
     user = request.user
     cardio_sessions = Cardio.objects.all().filter(user=user)
     workout_sessions = Workout.objects.all().filter(user=user)
-    context = {'workouts': workout_sessions, 'cardios': cardio_sessions}
+    nutrition_sessions = Nutrition.objects.all().filter(user=user)
+    context = {'workouts': workout_sessions, 'cardios': cardio_sessions, 'calories': nutrition_sessions}
     return render(request, 'workouts/viewWorkouts.html', context)
