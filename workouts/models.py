@@ -36,3 +36,21 @@ class Cardio(models.Model):
 
     def __str__(self):
         return self.type + " for " + str(self.duration) + " went " + str(self.distance_in_miles) + " miles on "  + str(self.date)
+
+
+class Nutrition(models.Model):
+    TYPES = [
+        ('fat', 'Fat'),
+        ('carb', 'Carb'),
+        ('protein', 'Protein')
+    ]
+    date = models.DateTimeField(help_text="Date of meal.", auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    type = models.CharField(choices=TYPES, max_length=15, help_text="Calorie Type")
+    count = models.PositiveSmallIntegerField(help_text="Calories (g)")
+
+
+    def __str__(self):
+        return str(self.count) + " g of " + self.type + " on " + str(self.date)
+

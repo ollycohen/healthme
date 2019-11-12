@@ -3,12 +3,12 @@ from django.shortcuts import render, redirect
 from datetime import timezone
 from django.contrib.auth.decorators import login_required
 
-from .forms import WorkoutForm, CardioForm
-from .models import Cardio, Workout
+from .forms import WorkoutForm, CardioForm, NutritionForm
+from .models import Cardio, Workout, Nutrition
 
 @login_required(login_url='/auth/signup')
 def add_workout(request):
-    context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm()}
+    context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm(), 'nutritionForm': NutritionForm()}
     if request.method == "POST":
         print(request.POST)
         if 'workout' in request.POST:
@@ -28,8 +28,20 @@ def add_workout(request):
                 cardio.save()
             else:
                 print("INVALID CARDIO")
-
+        if 'nutrition' in request.POST:
+            print("---- NURTRITION DETECTED --- ")
+            form = NutritionForm(request.POST)
+            if form.is_valid():
+                print("VALID NUTRITION")
+                nutrition = form.save(commit=False)
+                nutrition.user = request.user
+                nutrition.save()
+            else:
+                print("INVALID CALS")
     return render(request, 'workouts/addWorkout.html', context)
+
+
+
 
 @login_required(login_url='/auth/signup')
 def view_workouts(request):

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Workout, Cardio
+from .models import Workout, Cardio, Nutrition
 
 class WorkoutForm(forms.ModelForm):
     class Meta:
@@ -11,3 +11,8 @@ class CardioForm(forms.ModelForm):
     class Meta:
         model = Cardio
         fields = ('type', 'duration', 'distance_in_miles')
+
+class NutritionForm(forms.ModelForm):
+    class Meta:
+        model = Nutrition
+        fields = ('type', 'count')
