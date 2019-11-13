@@ -6,6 +6,7 @@
     <ul class="tabs">
       <li class="tab col s3"><a href="#test1">Weightlifting</a></li>
       <li class="tab col s3"><a href="#test2">Cardio</a></li>
+      <li class="tab col s3"><a href="#test3">Nutrition</a></li>
     </ul>
   </div>
 <div id="test1" class="col s12">
@@ -16,8 +17,8 @@
           <thead>
             <tr>
                 <th>Exercise</th>
-                <th>Sets</th>
-                <th>Reps Attempted</th>
+                <th>Sets Attempted</th>
+                <th>Reps</th>
                 <th>Weight</th>
                 <th>Sets Succesful</th>
             </tr>
@@ -59,6 +60,28 @@
           </tbody>
       </table>
   </div>
+</div>
+
+<div id="test3" class="col s12">
+  <h2 class="center">Nutrition</h2>
+  <div class="col s8 offset-s2">
+  <table class="responsive-table">
+        <thead>
+          <tr>
+              <th>Calorie Source</th>
+              <th>Grams</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for calorie in calories %}
+              <tr>
+                  <td>{{  calorie.type  }}</td>
+                  <td>{{  calorie.grams  }}</td>
+              </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
 </div>
 
 </div>

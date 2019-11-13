@@ -1,15 +1,15 @@
 {% include "navbar/navbar.html"%}
-
 {% load materializecss %}
 {% load static %}
 
-<h3> Welcome to HealthMe </h3>
 <script src="{% static 'js/graphs.js' %}"></script>
 
 <!-- use context to generate data at request-->
 
 <div id="chart1" class="chart_id"></div>
 
+<div> {{ carbs }} </div>
+<div> {{ proteins }} </div>
 
 <!-- req workouts, nutrition, cardio + display their components-->
 
@@ -33,6 +33,7 @@
     fat_data.push("{{ fat.grams }}"); 
   {% endfor %}
 
+
   var chart = c3.generate({
       bindto: '#chart1',
       data: {
@@ -47,17 +48,3 @@
 
 
 </script>
-
-<div class="row">
-    <div class="col s8 offset-s2">
-        <h2 class="center">Welcome to HealthMe!</h2>
-        <h5 class="center">The Application Designed to Optimize Your Health</h5>
-        {% if workouts.count < 5 %}
-            <p class="center">Come back for some insights once you have over 5 workouts recorded!</p>
-        {% else %}
-            <h6 class="center">Insights</h6>
-            <p>Total workouts : {{ workouts.count }}</p>
-            <p>Workout Success Ratio: {{ success_ratio|floatformat:2 }} </p>
-        {% endif %}
-    </div>
-</div>

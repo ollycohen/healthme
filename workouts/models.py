@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 import datetime
 
 class Workout(models.Model):
-    exercise_name = models.CharField(max_length = 50, help_text="The name of the workout you did.")
-    sets = models.PositiveSmallIntegerField(help_text="The number of sets you attempted.")
-    reps = models.PositiveSmallIntegerField(help_text="The number of reps you attempted for each set.")
-    weight = models.PositiveSmallIntegerField(help_text="The weight that you attempted.")
-    sets_successful = models.PositiveSmallIntegerField(help_text="The number of sets you completed succesfuly.")
+    exercise_name = models.CharField(max_length = 50)
+    sets = models.PositiveSmallIntegerField()
+    reps = models.PositiveSmallIntegerField()
+    weight = models.PositiveSmallIntegerField()
+    sets_successful = models.PositiveSmallIntegerField()
     date = models.DateTimeField(help_text="Date of exercise.", auto_now_add=True)
 
     # associate each workout with exactly one user
@@ -29,10 +29,28 @@ class Cardio(models.Model):
     # associate each workout with exactly one user
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    type = models.CharField(choices=TYPES, max_length=15, help_text="The type of cardio you did.")
-    duration = models.PositiveSmallIntegerField(help_text="How long you performed this cardio for.")
-    distance_in_miles= models.DecimalField(max_digits=4, decimal_places=2, help_text="Distance traveled.")
+    type = models.CharField(choices=TYPES, max_length=15)
+    duration = models.PositiveSmallIntegerField()
+    distance_in_miles= models.DecimalField(max_digits=4, decimal_places=2)
 
 
     def __str__(self):
         return self.type + " for " + str(self.duration) + " went " + str(self.distance_in_miles) + " miles on "  + str(self.date)
+
+
+class Nutrition(models.Model):
+    TYPES = [
+        ('fat', 'Fat'),
+        ('carb', 'Carb'),
+        ('protein', 'Protein')
+    ]
+    date = models.DateTimeField(help_text="Date of meal.", auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    type = models.CharField(choices=TYPES, max_length=15)
+    grams = models.PositiveSmallIntegerField()
+
+
+    def __str__(self):
+        return str(self.grams) + " g of " + self.type + " on " + str(self.date)
+

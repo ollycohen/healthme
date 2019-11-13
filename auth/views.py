@@ -25,7 +25,7 @@ def signup(request):
             if request.GET.get('next') != None:
                 return HttpResponseRedirect(request.GET.get('next'))
             else:
-                return render(request, '/home/home.html', {})
+                return render(request, 'home/home.html', {})
         else:
             messages.error(request, "There was an error with your signup form")
     else:
