@@ -51,3 +51,15 @@ def view_workouts(request):
     nutrition_sessions = Nutrition.objects.all().filter(user=user)
     context = {'workouts': workout_sessions, 'cardios': cardio_sessions, 'calories': nutrition_sessions}
     return render(request, 'workouts/viewWorkouts.html', context)
+
+
+@login_required(login_url='/auth/signup')
+def visualize_data(request):
+    user = request.user
+    calories = Nutrition.objects.all().filter(user=user)
+    fats = calories.all().filter(type='fat').values()
+    proteins = calories.all().filter(type='protein').values()
+    carbs = calories.all().filter(type='carb')
+    context = {'all_cals': calories, 'fats': fats, 'proteins': proteins, 'carbs': carbs}
+    return render(request, 'workouts/graph.html', context)
+

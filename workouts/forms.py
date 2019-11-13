@@ -15,4 +15,4 @@ class CardioForm(forms.ModelForm):
 class NutritionForm(forms.ModelForm):
     class Meta:
         model = Nutrition
-        fields = ('type', 'count')
+        fields = ('type', 'grams')

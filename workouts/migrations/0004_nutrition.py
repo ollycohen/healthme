@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateTimeField(auto_now_add=True, help_text='Date of meal.')),
                 ('type', models.CharField(choices=[('fat', 'Fat'), ('carb', 'Carb'), ('protein', 'Protein')], help_text='Calorie Type', max_length=15)),
-                ('count', models.PositiveSmallIntegerField(help_text='Calories (g)')),
+                ('grams', models.PositiveSmallIntegerField(help_text='Calories (g)')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

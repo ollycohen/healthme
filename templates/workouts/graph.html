@@ -1,0 +1,30 @@
+{% include "navbar/navbar.html"%}
+{% load materializecss %}
+{% load static %}
+
+<script src="{% static 'js/graphs.js' %}"></script>
+
+<!-- use context to generate data at request-->
+
+<div id="chart1" class="chart_id"></div>
+
+
+<!-- req workouts, nutrition, cardio + display their components-->
+
+<script type="text/javascript">
+
+var chart = c3.generate({
+    bindto: '#chart1',
+    data: {
+      columns: [
+        ['Attempted Sets', 30, 200, 100, 400, 150, 250],
+        ['Reps', 50, 20, 10, 40, 15, 25],
+        ['Weight', 50, 20, 10, 40, 15, 25],
+        ['Successful Sets', 50, 20, 10, 40, 15, 25]
+      ]
+    }
+});
+</script>
+
+
+</script>

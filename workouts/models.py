@@ -48,9 +48,9 @@ class Nutrition(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     type = models.CharField(choices=TYPES, max_length=15)
-    count = models.PositiveSmallIntegerField()
+    grams = models.PositiveSmallIntegerField()
 
 
     def __str__(self):
-        return str(self.count) + " g of " + self.type + " on " + str(self.date)
+        return str(self.grams) + " g of " + self.type + " on " + str(self.date)
 

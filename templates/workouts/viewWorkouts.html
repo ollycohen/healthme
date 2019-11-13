@@ -17,8 +17,8 @@
           <thead>
             <tr>
                 <th>Exercise</th>
-                <th>Sets</th>
-                <th>Reps Attempted</th>
+                <th>Sets Attempted</th>
+                <th>Reps</th>
                 <th>Weight</th>
                 <th>Sets Succesful</th>
             </tr>
@@ -76,7 +76,7 @@
           {% for calorie in calories %}
               <tr>
                   <td>{{  calorie.type  }}</td>
-                  <td>{{  calorie.count  }}</td>
+                  <td>{{  calorie.grams  }}</td>
               </tr>
           {% endfor %}
         </tbody>
