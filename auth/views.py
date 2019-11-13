@@ -2,6 +2,7 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 
 # a lot of code for authentication taken from https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
 
@@ -26,7 +27,7 @@ def signup(request):
             else:
                 return render(request, 'home/home.html', {})
         else:
-            print("INVALID FORM")
+            messages.error(request, "There was an error with your signup form")
     else:
         print("NO POST")
         form = UserCreationForm()
@@ -42,6 +43,8 @@ def login(request):
         if form.is_valid():
             auth_login(request, form.get_user())
             return HttpResponseRedirect('/')
+        else:
+            messages.error(request, "There was an error with your login form")
     else:
         form = AuthenticationForm(request)
 

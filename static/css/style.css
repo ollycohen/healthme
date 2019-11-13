@@ -1,0 +1,19 @@
+.no-pad{
+    padding: 0px!important;
+}
+.success{
+    background-color: green;
+}
+
+.error{
+    background-color: red;
+}
+
+.messages{
+    color: white;
+    margin: 0px;
+}
+
+.message{
+    padding: 10px 0px;
+}
