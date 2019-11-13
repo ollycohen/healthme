@@ -58,8 +58,8 @@ def visualize_data(request):
     user = request.user
     calories = Nutrition.objects.all().filter(user=user)
     fats = calories.all().filter(type='fat').values()
-    proteins = calories.all().filter(type='protein').values()
-    carbs = calories.all().filter(type='carb')
+    proteins = calories.all().filter(type='protein')
+    carbs = calories.all().filter(type='carb').values()
     context = {'all_cals': calories, 'fats': fats, 'proteins': proteins, 'carbs': carbs}
-    return render(request, 'workouts/graph.html', context)
+    return render(request, 'home/home.html', context)
 

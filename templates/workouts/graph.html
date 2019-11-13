@@ -8,22 +8,42 @@
 
 <div id="chart1" class="chart_id"></div>
 
+<div> {{ carbs }} </div>
+<div> {{ proteins }} </div>
 
 <!-- req workouts, nutrition, cardio + display their components-->
 
-<script type="text/javascript">
 
-var chart = c3.generate({
-    bindto: '#chart1',
-    data: {
-      columns: [
-        ['Attempted Sets', 30, 200, 100, 400, 150, 250],
-        ['Reps', 50, 20, 10, 40, 15, 25],
-        ['Weight', 50, 20, 10, 40, 15, 25],
-        ['Successful Sets', 50, 20, 10, 40, 15, 25]
-      ]
-    }
-});
+<script type="text/javascript">
+  var protein_data = [];
+  var carb_data = [];
+  var fat_data = [];
+
+  {% for protein in proteins %}
+    protein_data.push("{{ protein.grams }}"); 
+  {% endfor %}
+
+
+  {% for carb in carbs %}
+    carb_data.push("{{ carb.grams }}"); 
+  {% endfor %}
+
+
+  {% for fat in fats %}
+    fat_data.push("{{ fat.grams }}"); 
+  {% endfor %}
+
+
+  var chart = c3.generate({
+      bindto: '#chart1',
+      data: {
+        columns: [
+          ['Protein', ...protein_data],
+          ['Carb', ...carb_data],
+          ['Fat', ...fat_data]
+        ]
+      }
+  });
 </script>
 
 

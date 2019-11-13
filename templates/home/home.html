@@ -1,2 +1,49 @@
 {% include "navbar/navbar.html"%}
 
+{% load materializecss %}
+{% load static %}
+
+<h3> Welcome to HealthMe </h3>
+<script src="{% static 'js/graphs.js' %}"></script>
+
+<!-- use context to generate data at request-->
+
+<div id="chart1" class="chart_id"></div>
+
+
+<!-- req workouts, nutrition, cardio + display their components-->
+
+
+<script type="text/javascript">
+  var protein_data = [];
+  var carb_data = [];
+  var fat_data = [];
+
+  {% for protein in proteins %}
+    protein_data.push("{{ protein.grams }}"); 
+  {% endfor %}
+
+
+  {% for carb in carbs %}
+    carb_data.push("{{ carb.grams }}"); 
+  {% endfor %}
+
+
+  {% for fat in fats %}
+    fat_data.push("{{ fat.grams }}"); 
+  {% endfor %}
+
+  var chart = c3.generate({
+      bindto: '#chart1',
+      data: {
+        columns: [
+          ['Protein', ...protein_data],
+          ['Carb', ...carb_data],
+          ['Fat', ...fat_data]
+        ]
+      }
+  });
+</script>
+
+
+</script>
