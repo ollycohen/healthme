@@ -15,7 +15,6 @@ def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            print("VALID FORM!")
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -25,11 +24,10 @@ def signup(request):
             if request.GET.get('next') != None:
                 return HttpResponseRedirect(request.GET.get('next'))
             else:
-                return render(request, 'home/home.html', {})
+                return render(request, 'home/home-authenticated.html', {})
         else:
             messages.error(request, "There was an error with your signup form")
     else:
-        print("NO POST")
         form = UserCreationForm()
 
     return render(request, 'auth/signup.html', {'form': form})
