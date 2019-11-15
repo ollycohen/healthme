@@ -7,7 +7,7 @@ from django.contrib import messages
 from .forms import WorkoutForm, CardioForm, NutritionForm
 from .models import Cardio, Workout, Nutrition
 
-@login_required(login_url='/auth/signup')
+@login_required(login_url='/')
 def add_workout(request):
     context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm(), 'nutritionForm': NutritionForm()}
     if request.method == "POST":
@@ -43,8 +43,8 @@ def add_workout(request):
 
 
 
-
-@login_required(login_url='/auth/signup')
+# if user is not logged in, redirect to home page
+@login_required(login_url='/home')
 def view_workouts(request):
     user = request.user
     cardio_sessions = Cardio.objects.all().filter(user=user)
@@ -54,7 +54,7 @@ def view_workouts(request):
     return render(request, 'workouts/viewWorkouts.html', context)
 
 
-@login_required(login_url='/auth/signup')
+@login_required(login_url='/home')
 def visualize_data(request):
     user = request.user
     calories = Nutrition.objects.all().filter(user=user)
@@ -62,5 +62,5 @@ def visualize_data(request):
     proteins = calories.all().filter(type='protein')
     carbs = calories.all().filter(type='carb').values()
     context = {'all_cals': calories, 'fats': fats, 'proteins': proteins, 'carbs': carbs}
-    return render(request, 'home/home.html', context)
+    return render(request, 'workouts/visualize.html', context)
 

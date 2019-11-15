@@ -129,5 +129,5 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 # set redirect when user hits logout
-LOGOUT_REDIRECT_URL = "/auth/login"
+LOGOUT_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"

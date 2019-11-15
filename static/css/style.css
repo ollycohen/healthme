@@ -1,19 +1,76 @@
-.no-pad{
-    padding: 0px!important;
+.no-pad {
+  padding: 0px !important;
 }
-.success{
-    background-color: green;
-}
-
-.error{
-    background-color: red;
+.success {
+  background-color: green;
 }
 
-.messages{
-    color: white;
-    margin: 0px;
+.error {
+  background-color: red;
 }
 
-.message{
-    padding: 10px 0px;
+.messages {
+  color: white;
+  margin: 0px;
+}
+
+.message {
+  padding: 10px 0px;
+}
+.brand-logo {
+  margin-left: 30px;
+}
+
+.home-column {
+  font-size: 1.1em;
+  font-family: tahoma sans-serif;
+  margin-bottom: 0;
+  text-align: justify;
+  color: #6c5b7b;
+  padding: 30px;
+}
+
+.text-basic {
+  font-size: 1.5em;
+  font-family: tahoma sans-serif;
+  margin-bottom: 0;
+  text-align: justify;
+  color: #6c5b7b;
+  padding-bottom: 50px;
+}
+
+.parallax-container {
+  height: 600px;
+}
+/* big text in parallax background. all parallax styling taken from a jason 204 assignment */
+#parallax-big-text {
+  font-size: 60px;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000000;
+  text-align: center;
+  /* taken from https://stackoverflow.com/questions/47864663/how-can-i-center-a-div-in-a-parallax-background-image */
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* buttons to center */
+.btn-container {
+  position: static;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 350px;
+}
+
+/* only used for parallax buttons */
+.top-margin {
+  margin-top: 350px;
+}
+
+.btn-container a {
+  margin: 10px 10px;
+  font-weight: bold;
 }
