@@ -40,7 +40,7 @@
 }
 
 .parallax-container {
-  height: 600px;
+  height: 500px;
 }
 /* big text in parallax background. all parallax styling taken from a jason 204 assignment */
 #parallax-big-text {
@@ -59,10 +59,10 @@
 
 /* buttons to center */
 .btn-container {
-  position: static;
-  width: 50%;
-  margin-left: 25%;
-  margin-top: 350px;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* only used for parallax buttons */
@@ -73,4 +73,14 @@
 .btn-container a {
   margin: 10px 10px;
   font-weight: bold;
+}
+
+.fas,
+.far {
+  font-size: 1.3em;
+  margin-right: 5px;
+}
+
+.parallax-container {
+  width: 100%;
 }

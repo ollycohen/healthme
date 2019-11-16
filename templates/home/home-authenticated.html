@@ -1,43 +1,42 @@
-{% include "navbar/navbar.html"%}
+{% include "navbar/navbar.html"%} {% load materializecss %} {% load static %}
 
-{% load materializecss %}
-{% load static %}
-
-  <div class="parallax-container">
-      <h1 id="parallax-big-text">Take Your Health To The Next Level</h1>
-      <div class="text-center btn-container ">
-      <a class="btn btn-danger" href="/workouts/add" role="button">
-        Record Data
-      </a>
-      <a class="btn btn-danger" href="/workouts/view" role="button">
-        View All Data
-      </a
-      >
-      <a class="btn btn-danger" href="/workouts/visualize" role="button">
-        Visualize Results
-      </a>
-      </div>
-      <div class="parallax">
-        <img src="{% static 'images/parallax.jpg' %}">
-      </div>
+<div class="parallax-container">
+  <h1 id="parallax-big-text">Take Your Health To The Next Level</h1>
+  <div class="btn-container ">
+    <a class="btn" href="/workouts/add" role="button">
+      Record Data
+    </a>
+    <a class="btn" href="/workouts/view" role="button">
+      View All Data
+    </a>
+    <a class="btn" href="/workouts/visualize" role="button">
+      Visualize Results
+    </a>
   </div>
+  <div class="parallax">
+    <img src="{% static 'images/parallax2.jpg' %}" />
+  </div>
+</div>
 
-  {% comment %} <!-- jumbotrong image -->
-  <div class="jumbotron row parallax text-center">
-    <h1 id="parallax-big-text">Elevate Your Game</h1>
-    <div class="text-center btn-container">
-      <a class="btn btn-danger" href="./news.html" role="button">News</a>
-      <a class="btn btn-danger" href="./schedule.html" role="button"
-        >League Standings and Schedule</a
-      >
-      <a class="btn btn-danger" href="./search.html" role="button"
-        >Player Search</a
-      >
-    </div>
-  </div> {% endcomment %}
+{% comment %}
+<!-- jumbotrong image -->
+<div class="jumbotron row parallax text-center">
+  <h1 id="parallax-big-text">Elevate Your Game</h1>
+  <div class="text-center btn-container">
+    <a class="btn btn-danger" href="./news.html" role="button">News</a>
+    <a class="btn btn-danger" href="./schedule.html" role="button"
+      >League Standings and Schedule</a
+    >
+    <a class="btn btn-danger" href="./search.html" role="button"
+      >Player Search</a
+    >
+  </div>
+</div>
+{% endcomment %}
 
 <!-- jumbotron image, taken from Jason CSE 204 final project -->
-{% comment %} <div class="jumbotron row parallax text-center">
+{% comment %}
+<div class="jumbotron row parallax text-center">
   <h1 id="parallax-big-text">Take Your Health To The Next Level</h1>
   <div class="text-center btn-container">
     <a class="btn" href="/workouts/add">
@@ -46,17 +45,22 @@
     <a class="btn" href="/workouts/view">
       View Your Entries
     </a>
-    <a class="btn" href="/workouts/visualize"
-      >Visualize Results
-    </a>
-</div> {% endcomment %}
+    <a class="btn" href="/workouts/visualize">Visualize Results </a>
+  </div>
+  {% endcomment %}
 
-<h3 class="center">Why HealthMe?</h3>
-<div class="container">
-  <p class="text-basic">We designed HealthMe because we were tired of outdated, unintuitive, and underdeveloped tooling for something as important as our health. Instead of having seperate tools for tracking nutrtiion, fitness, and visualizing this data, we combined all three functions into one so that our users could have the most streamlined health optimization experience.</p>
+  <h3 class="center">Why HealthMe?</h3>
+  <div class="container">
+    <p class="text-basic">
+      We designed HealthMe because we were tired of outdated, unintuitive, and
+      underdeveloped tooling for something as important as our health. Instead
+      of having seperate tools for tracking nutrtiion, fitness, and visualizing
+      this data, we combined all three functions into one so that our users
+      could have the most streamlined health optimization experience.
+    </p>
+  </div>
+
+  <script>
+    $(".parallax").parallax();
+  </script>
 </div>
-
-<script>
-    $('.parallax').parallax();
-</script>
-

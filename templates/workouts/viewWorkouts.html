@@ -1,87 +1,176 @@
-{% include "navbar/navbar.html"%}
-{% load materializecss %}
-
+{% include "navbar/navbar.html"%} {% load materializecss %}
 <div class="row">
   <div class="col s12 no-pad">
-    <ul class="tabs">
+    <ul class="tabs tabs-fixed-width">
       <li class="tab col s3"><a href="#test1">Weightlifting</a></li>
       <li class="tab col s3"><a href="#test2">Cardio</a></li>
       <li class="tab col s3"><a href="#test3">Nutrition</a></li>
     </ul>
   </div>
-<div id="test1" class="col s12">
-  <h2 class="center">Weightlifting</h2>
-  <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
-  <div class="col s8 offset-s2">
-      <table class="responsive-table">
-          <thead>
-            <tr>
-                <th>Exercise</th>
-                <th>Sets Attempted</th>
-                <th>Reps</th>
-                <th>Weight</th>
-                <th>Sets Succesful</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for workout in workouts %}
-                <tr>
-                    <td>{{  workout.exercise_name  }}</td>
-                    <td>{{  workout.sets  }}</td>
-                    <td>{{  workout.reps  }}</td>
-                    <td>{{  workout.weight  }}</td>
-                    <td>{{  workout.sets_successful  }}</td>
-                </tr>
-            {% endfor %}
-          </tbody>
-      </table>
-  </div>
-</div>
-<div id="test2" class="col s12">
-    <h2 class="center">Cardio</h2>
+  <div id="test1" class="col s12">
+    {% if workouts %}
+    <h2 class="center">Weightlifting</h2>
+    {% endif %}
+    <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
     <div class="col s8 offset-s2">
-    <table class="responsive-table">
-          <thead>
-            <tr>
-                <th>Exercise</th>
-                <th>Duration</th>
-                <th>Distance</th>
+      <!-- only display table if there is data -->
+      {% if not workouts %}
+      <div class="center">
+        <h1 class="no-data">Enter some workout data to get started!</h1>
+        <a class="waves-effect waves-light btn" href="/workouts/add"
+          >Enter Workout</a
+        >
+      </div>
 
-            </tr>
-          </thead>
-          <tbody>
-            {% for cardio in cardios %}
-                <tr>
-                    <td>{{  cardio.type  }}</td>
-                    <td>{{  cardio.duration  }}</td>
-                    <td>{{  cardio.distance_in_miles  }}</td>
-                </tr>
-            {% endfor %}
-          </tbody>
-      </table>
-  </div>
-</div>
-
-<div id="test3" class="col s12">
-  <h2 class="center">Nutrition</h2>
-  <div class="col s8 offset-s2">
-  <table class="responsive-table">
+      {% else %}
+      <table class="responsive-table centered striped">
         <thead>
           <tr>
-              <th>Calorie Source</th>
-              <th>Grams</th>
+            <th>Exercise</th>
+            <th>Sets Attempted</th>
+            <th>Reps</th>
+            <th>Weight</th>
+            <th>Sets Succesful</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for workout in workouts %}
+          <tr>
+            <td>{{ workout.exercise_name }}</td>
+            <td>{{ workout.sets }}</td>
+            <td>{{ workout.reps }}</td>
+            <td>{{ workout.weight }}</td>
+            <td>{{ workout.sets_successful }}</td>
+            <td>
+              <a class="waves-effect waves-light btn z-depth-2 delete-button" id="W{{ workout.id  }}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+  <div id="test2" class="col s12">
+    {% if cardios %}
+    <h2 class="center">Cardio</h2>
+    {% endif %}
+    <div class="col s8 offset-s2">
+      {% if not cardios %}
+      <div class="center">
+        <h1 class="no-data">Enter some cardio data to get started!</h1>
+        <a class="waves-effect waves-light btn" href="/workouts/add"
+          >Enter Cardio</a
+        >
+      </div>
+
+      {% else %}
+      <table class="responsive-table centered striped">
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Duration</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cardio in cardios %}
+          <tr>
+            <td>{{ cardio.type }}</td>
+            <td>{{ cardio.duration }}</td>
+            <td>{{ cardio.distance_in_miles }}</td>
+            <td>
+              <a class="waves-effect waves-light btn z-depth-2 delete-button" id="C{{ cardio.id  }}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+
+  <div id="test3" class="col s12">
+    {% if calories %}
+    <h2 class="center">Nutrition</h2>
+    {% endif %}
+    <div class="col s8 offset-s2">
+      {% if not calories %}
+      <div class="center">
+        <h1 class="no-data">Enter some nutrition data to get started!</h1>
+        <a class="waves-effect waves-light btn" href="/workouts/add"
+          >Enter Nutrition Data</a
+        >
+      </div>
+      {% else %}
+      <table class="responsive-table centered striped">
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Grams of Protein</th>
+            <th>Grams of Fat</th>
+            <th>Grams of Carbs</th>
+            <th>Calories</th>
           </tr>
         </thead>
         <tbody>
           {% for calorie in calories %}
-              <tr>
-                  <td>{{  calorie.type  }}</td>
-                  <td>{{  calorie.grams  }}</td>
-              </tr>
+          <tr>
+            <td>{{ calorie.food_name }}</td>
+            <td>{{ calorie.grams_of_protein }}</td>
+            <td>{{ calorie.grams_of_fat }}</td>
+            <td>{{ calorie.grams_of_carbs }}</td>
+            <td>{{ calorie.calories }}</td>
+            <td>
+                <a class="waves-effect waves-light btn z-depth-2 delete-button" id="M{{ calorie.id  }}">Delete</a>
+            </td>
+          </tr>
           {% endfor %}
         </tbody>
-    </table>
-</div>
+      </table>
+      {% endif %}
+    </div>
+  </div>
 </div>
 
-</div>
+<script>
+  // async deletion of rows when delete button is clicked
+  $(".delete-button").click(function(e){
+    var id = e.target.id;
+
+    // depending on if a workout, cardio, or meal delete button was hit, we need to hit different endpoints
+    var source = id.charAt(0);
+    var urlModifierForSource;
+    switch(source){
+      case 'W':
+        urlModifierForSource = "workout";
+        break;
+      case 'C':
+        urlModifierForSource = "cardio";
+        break;
+      case 'M':
+        urlModifierForSource = "meal";
+        break;
+      default:
+        alert("Unrecognized id on the delete element!");
+    }
+
+    // now we know which endpoint to hit
+    var url = "http://{{ request.get_host }}/workouts/delete/" + urlModifierForSource + "/" + id.substring(1);
+    alert("url is " + url);
+    $.ajax({
+      url: url,  
+      type: 'POST', 
+      success: function(result){
+        M.toast({html: 'Your data was succesfully deleted!'});
+        // a < td < tr
+        $("#"+e.target.id).parent().parent().remove();
+      },
+      error: function(result){
+        M.toast({html: 'There was an error deleting your data!'});
+        console.log(result);
+      }
+      });
+  });
+</script>
+

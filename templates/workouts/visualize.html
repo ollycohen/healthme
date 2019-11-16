@@ -1,63 +1,76 @@
-{% include "navbar/navbar.html"%}
+{% include "navbar/navbar.html"%} {% load materializecss %} {% load static %}
 
-{% load materializecss %}
-{% load static %}
-
-<h3> Welcome to HealthMe </h3>
+<h3>Welcome to HealthMe</h3>
 <script src="{% static 'js/graphs.js' %}"></script>
 
 <!-- use context to generate data at request-->
 
 <div id="chart1" class="chart_id"></div>
 
-
 <!-- req workouts, nutrition, cardio + display their components-->
 
-
 <script type="text/javascript">
-  var protein_data = [];
-  var carb_data = [];
-  var fat_data = [];
+      var meal_data = [];
+      var workout_data = [];
+      var cardio_data = [];
 
-  {% for protein in proteins %}
-    protein_data.push("{{ protein.grams }}"); 
-  {% endfor %}
+      {% for meal in meals %}
+        console.log("blah");
+        meal_data.push({
+          "calories": "{{  meal.calories  }}",
+          "proteins_grams": "{{  meal.grams_of_protein  }}",
+          "fat_grams": "{{  meal.grams_of_fat  }}",
+          "carb_grams": "{{  meal.grams_of_carbs  }}",
+          "date":"{{  meal.date  }}"
+        })
+      {% endfor %}
+      console.log(meal_data);
 
+      // map from a date to a the number of calories eaten in that day
+      var dateToCalories = new Map();
+      meal_data.forEach(function(meal){
+        if(dateToCalories.has(meal.date)){
+          dateToCalories.set(meal.date, dateToCalories.get(meal.date) + meal.calories);
+        }
+        else{
+          dateToCalories.set(meal.date, meal.calories);
+        }
+      });
 
-  {% for carb in carbs %}
-    carb_data.push("{{ carb.grams }}"); 
-  {% endfor %}
+      // sort map by date
+      dateToCalories = new Map([...dateToCalories.entries()].sort((a, b)=>{
+        var date1 = new Date(a);
+        var date2 = new Date(b);
+        return a > b;
+      }));
 
+      var calories = [];
+      var dates = [];
+      dates.push("Dates");
+      calories.push("Calories");
 
-  {% for fat in fats %}
-    fat_data.push("{{ fat.grams }}"); 
-  {% endfor %}
+      dateToCalories.forEach((value, key, map) => {
+          calories.push(value);
+          dates.push(new Date(key));
+      });
 
-  var chart = c3.generate({
+      var chart = c3.generate({
       bindto: '#chart1',
       data: {
-        columns: [
-          ['Protein', ...protein_data],
-          ['Carb', ...carb_data],
-          ['Fat', ...fat_data]
-        ]
+          x: 'Dates',
+          columns: [
+              dates,
+              calories
+          ]
+      },
+      axis: {
+          x: {
+              type: 'timeseries',
+              tick: {
+                  format: '%Y-%m-%d',
+                  rotate: 90
+              }
+          }
       }
   });
 </script>
-
-
-</script>
-
-<div class="row">
-    <div class="col s8 offset-s2">
-        <h2 class="center">Welcome to HealthMe!</h2>
-        <h5 class="center">The Application Designed to Optimize Your Health</h5>
-        {% if workouts.count < 5 %}
-            <p class="center">Come back for some insights once you have over 5 workouts recorded!</p>
-        {% else %}
-            <h6 class="center">Insights</h6>
-            <p>Total workouts : {{ workouts.count }}</p>
-            <p>Workout Success Ratio: {{ success_ratio|floatformat:2 }} </p>
-        {% endif %}
-    </div>
-</div>
