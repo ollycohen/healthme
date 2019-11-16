@@ -44,6 +44,6 @@ class Nutrition(models.Model):
     grams_of_protein = models.PositiveSmallIntegerField()
     grams_of_carbs = models.PositiveSmallIntegerField()
     grams_of_fat = models.PositiveSmallIntegerField()
-
+    calories = models.PositiveSmallIntegerField()
     date = models.DateTimeField(help_text="Date of meal.", auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
