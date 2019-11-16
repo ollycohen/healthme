@@ -18,4 +18,5 @@ class CardioForm(forms.ModelForm):
 class NutritionForm(forms.ModelForm):
     class Meta:
         model = Nutrition
-        fields = ('grams_of_fat', 'grams_of_protein', 'grams_of_carbs')
+        fields = ('food_name', 'grams_of_fat',
+                  'grams_of_protein', 'grams_of_carbs')

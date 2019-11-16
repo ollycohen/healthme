@@ -41,6 +41,7 @@ class Cardio(models.Model):
 
 
 class Nutrition(models.Model):
+    food_name = models.CharField(max_length=50)
     grams_of_protein = models.PositiveSmallIntegerField()
     grams_of_carbs = models.PositiveSmallIntegerField()
     grams_of_fat = models.PositiveSmallIntegerField()

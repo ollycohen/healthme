@@ -23,7 +23,7 @@
       </div>
 
       {% else %}
-      <table class="responsive-table">
+      <table class="responsive-table centered striped">
         <thead>
           <tr>
             <th>Exercise</th>
@@ -62,7 +62,7 @@
       </div>
 
       {% else %}
-      <table class="responsive-table">
+      <table class="responsive-table centered striped">
         <thead>
           <tr>
             <th>Exercise</th>
@@ -85,7 +85,7 @@
   </div>
 
   <div id="test3" class="col s12">
-    {% if nutrition %}
+    {% if calories %}
     <h2 class="center">Nutrition</h2>
     {% endif %}
     <div class="col s8 offset-s2">
@@ -97,18 +97,24 @@
         >
       </div>
       {% else %}
-      <table class="responsive-table">
+      <table class="responsive-table centered striped">
         <thead>
           <tr>
-            <th>Calorie Source</th>
-            <th>Grams</th>
+            <th>Food</th>
+            <th>Grams of Protein</th>
+            <th>Grams of Fat</th>
+            <th>Grams of Carbs</th>
+            <th>Calories</th>
           </tr>
         </thead>
         <tbody>
           {% for calorie in calories %}
           <tr>
-            <td>{{ calorie.type }}</td>
-            <td>{{ calorie.grams }}</td>
+            <td>{{ calorie.food_name }}</td>
+            <td>{{ calorie.grams_of_protein }}</td>
+            <td>{{ calorie.grams_of_fat }}</td>
+            <td>{{ calorie.grams_of_carbs }}</td>
+            <td>{{ calorie.calories }}</td>
           </tr>
           {% endfor %}
         </tbody>
