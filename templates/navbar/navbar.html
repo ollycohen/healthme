@@ -27,7 +27,6 @@
       $(document).ready(function(){
         $('.tabs').tabs();
       });
-      $('.parallax').parallax();
     </script>
 
   <!--  code for materializecss-form package -->
@@ -41,6 +40,11 @@
 
   });
   </script>
+
+  <!-- fontawesome import -->
+  <script src="https://kit.fontawesome.com/2e4931c44a.js" crossorigin="anonymous"></script>
+
+  
 </head>
 <body>
 {% if messages %}
@@ -67,15 +71,15 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <!-- only display other options if user is logged in -->
         {% if user.is_authenticated %}
-          <li><a href="/">Home</a></li>
-          <li><a href="/workouts/add">Add </a></li>
-          <li><a href="/workouts/view">View </a></li>
-          <li><a href="/workouts/visualize">Visualize</a></li>
-          <li><a href="/auth/logout">Logout</a></li>
+          <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
+          <li><a href="/workouts/add"><i class="fas fa-dumbbell"></i>Add</a></li>
+          <li><a href="/workouts/view"><i class="fas fa-database"></i>View</a></li>
+          <li><a href="/workouts/visualize"><i class="fas fa-chart-line"></i>Visualize</a></li>
+          <li><a href="/auth/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
         {% else %}
-          <li><a href="/">Home</a></li>
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/signup">Signup</a></li>
+          <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
+          <li><a href="/auth/login"><i class="far fa-user"></i>Login</a></li>
+          <li><a href="/auth/signup"><i class="fas fa-user-edit"></i>Signup</a></li>
         {% endif %}
       </ul>
     </div>
