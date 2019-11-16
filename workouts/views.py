@@ -75,3 +75,27 @@ def visualize_data(request):
 
     context = {'meals': meals, 'workouts': workouts, 'cardios': cardio}
     return render(request, 'workouts/visualize.html', context)
+
+
+@login_required(login_url='/home')
+def delete_workout(request, id):
+    workout = Workout.objects.get(id=id)
+    if(workout.user == request.user):
+        workout.delete()
+    return redirect('/workouts/view', {})
+
+
+@login_required(login_url='/home')
+def delete_meal(request, id):
+    meal = Nutrition.objects.get(id=id)
+    if(meal.user == request.user):
+        meal.delete()
+    return redirect('/workouts/view', {})
+
+
+@login_required(login_url='/home')
+def delete_cardio(request, id):
+    cardio = Cardio.objects.get(id=id)
+    if(cardio.user == request.user):
+        cardio.delete()
+    return redirect('/workouts/view', {})

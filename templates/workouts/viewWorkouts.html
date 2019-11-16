@@ -41,6 +41,11 @@
             <td>{{ workout.reps }}</td>
             <td>{{ workout.weight }}</td>
             <td>{{ workout.sets_successful }}</td>
+            <td>
+            <form method="POST">
+              <a class="waves-effect waves-light btn z-depth-2" href="/workouts/delete/workout/{{  workout.id  }}">Delete</a>
+            </form>
+          </td>
           </tr>
           {% endfor %}
         </tbody>
@@ -76,6 +81,11 @@
             <td>{{ cardio.type }}</td>
             <td>{{ cardio.duration }}</td>
             <td>{{ cardio.distance_in_miles }}</td>
+            <td>
+              <form method="POST">
+                <a class="waves-effect waves-light btn z-depth-2" href="/workouts/delete/cardio/{{  cardio.id  }}">Delete</a>
+              </form>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
@@ -115,6 +125,11 @@
             <td>{{ calorie.grams_of_fat }}</td>
             <td>{{ calorie.grams_of_carbs }}</td>
             <td>{{ calorie.calories }}</td>
+            <td>
+              <form method="POST">
+                <a class="waves-effect waves-light btn z-depth-2" href="/workouts/delete/meal/{{  calorie.id  }}">Delete</a>
+              </form>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
