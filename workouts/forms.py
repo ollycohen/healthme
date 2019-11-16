@@ -2,17 +2,20 @@ from django import forms
 
 from .models import Workout, Cardio, Nutrition
 
+
 class WorkoutForm(forms.ModelForm):
     class Meta:
         model = Workout
         fields = ('exercise_name', 'sets', 'reps', 'weight', 'sets_successful')
+
 
 class CardioForm(forms.ModelForm):
     class Meta:
         model = Cardio
         fields = ('type', 'duration', 'distance_in_miles')
 
+
 class NutritionForm(forms.ModelForm):
     class Meta:
         model = Nutrition
-        fields = ('type', 'grams')
+        fields = ('grams_of_fat', 'grams_of_protein', 'grams_of_carbs')
