@@ -1,87 +1,119 @@
-{% include "navbar/navbar.html"%}
-{% load materializecss %}
-
+{% include "navbar/navbar.html"%} {% load materializecss %}
 <div class="row">
   <div class="col s12 no-pad">
-    <ul class="tabs">
+    <ul class="tabs tabs-fixed-width">
       <li class="tab col s3"><a href="#test1">Weightlifting</a></li>
       <li class="tab col s3"><a href="#test2">Cardio</a></li>
       <li class="tab col s3"><a href="#test3">Nutrition</a></li>
     </ul>
   </div>
-<div id="test1" class="col s12">
-  <h2 class="center">Weightlifting</h2>
-  <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
-  <div class="col s8 offset-s2">
-      <table class="responsive-table">
-          <thead>
-            <tr>
-                <th>Exercise</th>
-                <th>Sets Attempted</th>
-                <th>Reps</th>
-                <th>Weight</th>
-                <th>Sets Succesful</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for workout in workouts %}
-                <tr>
-                    <td>{{  workout.exercise_name  }}</td>
-                    <td>{{  workout.sets  }}</td>
-                    <td>{{  workout.reps  }}</td>
-                    <td>{{  workout.weight  }}</td>
-                    <td>{{  workout.sets_successful  }}</td>
-                </tr>
-            {% endfor %}
-          </tbody>
-      </table>
-  </div>
-</div>
-<div id="test2" class="col s12">
-    <h2 class="center">Cardio</h2>
+  <div id="test1" class="col s12">
+    {% if workouts %}
+    <h2 class="center">Weightlifting</h2>
+    {% endif %}
+    <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
     <div class="col s8 offset-s2">
-    <table class="responsive-table">
-          <thead>
-            <tr>
-                <th>Exercise</th>
-                <th>Duration</th>
-                <th>Distance</th>
+      <!-- only display table if there is data -->
+      {% if not workouts %}
+      <div class="center">
+        <h1 class="no-data">Enter some workout data to get started!</h1>
+        <a class="waves-effect waves-light btn" href="/workouts/add"
+          >Enter Workout</a
+        >
+      </div>
 
-            </tr>
-          </thead>
-          <tbody>
-            {% for cardio in cardios %}
-                <tr>
-                    <td>{{  cardio.type  }}</td>
-                    <td>{{  cardio.duration  }}</td>
-                    <td>{{  cardio.distance_in_miles  }}</td>
-                </tr>
-            {% endfor %}
-          </tbody>
-      </table>
-  </div>
-</div>
-
-<div id="test3" class="col s12">
-  <h2 class="center">Nutrition</h2>
-  <div class="col s8 offset-s2">
-  <table class="responsive-table">
+      {% else %}
+      <table class="responsive-table">
         <thead>
           <tr>
-              <th>Calorie Source</th>
-              <th>Grams</th>
+            <th>Exercise</th>
+            <th>Sets Attempted</th>
+            <th>Reps</th>
+            <th>Weight</th>
+            <th>Sets Succesful</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for workout in workouts %}
+          <tr>
+            <td>{{ workout.exercise_name }}</td>
+            <td>{{ workout.sets }}</td>
+            <td>{{ workout.reps }}</td>
+            <td>{{ workout.weight }}</td>
+            <td>{{ workout.sets_successful }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+  <div id="test2" class="col s12">
+    {% if cardios %}
+    <h2 class="center">Cardio</h2>
+    {% endif %}
+    <div class="col s8 offset-s2">
+      {% if not cardios %}
+      <div class="center">
+        <h1 class="no-data">Enter some cardio data to get started!</h1>
+        <a class="waves-effect waves-light btn" href="/workouts/add"
+          >Enter Cardio</a
+        >
+      </div>
+
+      {% else %}
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Duration</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cardio in cardios %}
+          <tr>
+            <td>{{ cardio.type }}</td>
+            <td>{{ cardio.duration }}</td>
+            <td>{{ cardio.distance_in_miles }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+
+  <div id="test3" class="col s12">
+    {% if nutrition %}
+    <h2 class="center">Nutrition</h2>
+    {% endif %}
+    <div class="col s8 offset-s2">
+      {% if not calories %}
+      <div class="center">
+        <h1 class="no-data">Enter some nutrition data to get started!</h1>
+        <a class="waves-effect waves-light btn" href="/workouts/add"
+          >Enter Nutrition Data</a
+        >
+      </div>
+      {% else %}
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>Calorie Source</th>
+            <th>Grams</th>
           </tr>
         </thead>
         <tbody>
           {% for calorie in calories %}
-              <tr>
-                  <td>{{  calorie.type  }}</td>
-                  <td>{{  calorie.grams  }}</td>
-              </tr>
+          <tr>
+            <td>{{ calorie.type }}</td>
+            <td>{{ calorie.grams }}</td>
+          </tr>
           {% endfor %}
         </tbody>
-    </table>
-</div>
-</div>
-
+      </table>
+      {% endif %}
+    </div>
+  </div>
 </div>
