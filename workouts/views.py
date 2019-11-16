@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from datetime import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 from .forms import WorkoutForm, CardioForm, NutritionForm
 from .models import Cardio, Workout, Nutrition
@@ -67,10 +69,9 @@ def view_workouts(request):
 @login_required(login_url='/home')
 def visualize_data(request):
     user = request.user
-    calories = Nutrition.objects.all().filter(user=user)
-    fats = calories.all().filter(type='fat').values()
-    proteins = calories.all().filter(type='protein')
-    carbs = calories.all().filter(type='carb').values()
-    context = {'all_cals': calories, 'fats': fats,
-               'proteins': proteins, 'carbs': carbs}
+    cardio = Cardio.objects.all().filter(user=user)
+    workouts = Workout.objects.all().filter(user=user)
+    meals = Nutrition.objects.all().filter(user=user)
+
+    context = {'meals': meals, 'workouts': workouts, 'cardios': cardio}
     return render(request, 'workouts/visualize.html', context)

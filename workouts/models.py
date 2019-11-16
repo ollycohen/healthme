@@ -9,8 +9,7 @@ class Workout(models.Model):
     reps = models.PositiveSmallIntegerField()
     weight = models.PositiveSmallIntegerField()
     sets_successful = models.PositiveSmallIntegerField()
-    date = models.DateTimeField(
-        help_text="Date of exercise.", auto_now_add=True)
+    date = models.DateField()
 
     # associate each workout with exactly one user
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,8 +25,7 @@ class Cardio(models.Model):
         ('elipitical', 'Eliptical'),
         ('other', 'Other')
     ]
-    date = models.DateTimeField(
-        help_text="Date of exercise.", auto_now_add=True)
+    date = models.DateField()
 
     # associate each workout with exactly one user
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -46,5 +44,5 @@ class Nutrition(models.Model):
     grams_of_carbs = models.PositiveSmallIntegerField()
     grams_of_fat = models.PositiveSmallIntegerField()
     calories = models.PositiveSmallIntegerField()
-    date = models.DateTimeField(help_text="Date of meal.", auto_now_add=True)
+    date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
