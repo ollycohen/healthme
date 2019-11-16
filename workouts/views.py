@@ -82,7 +82,10 @@ def delete_workout(request, id):
     workout = Workout.objects.get(id=id)
     if(workout.user == request.user):
         workout.delete()
-    return redirect('/workouts/view', {})
+        payload = {'success': True}
+    else:
+        payload = {'success': False}
+    return HttpResponse(json.dumps(payload), content_type='application/json')
 
 
 @login_required(login_url='/home')
@@ -90,7 +93,10 @@ def delete_meal(request, id):
     meal = Nutrition.objects.get(id=id)
     if(meal.user == request.user):
         meal.delete()
-    return redirect('/workouts/view', {})
+        payload = {'success': True}
+    else:
+        payload = {'success': False}
+    return HttpResponse(json.dumps(payload), content_type='application/json')
 
 
 @login_required(login_url='/home')
@@ -98,4 +104,7 @@ def delete_cardio(request, id):
     cardio = Cardio.objects.get(id=id)
     if(cardio.user == request.user):
         cardio.delete()
-    return redirect('/workouts/view', {})
+        payload = {'success': True}
+    else:
+        payload = {'success': False}
+    return HttpResponse(json.dumps(payload), content_type='application/json')
