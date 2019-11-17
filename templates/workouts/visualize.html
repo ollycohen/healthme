@@ -5,72 +5,239 @@
 
 <!-- use context to generate data at request-->
 
-<div id="chart1" class="chart_id"></div>
+<div class="contaner">
+  <div class="row">
+    <div id="chart1" class="chart_id chart-class"></div>
+  </div>
+</div>
 
 <!-- req workouts, nutrition, cardio + display their components-->
 
 <script type="text/javascript">
-      var meal_data = [];
-      var workout_data = [];
-      var cardio_data = [];
+        // parsing meal data
+        var meal_data = [];
+        var workout_data = [];
+        var cardio_data = [];
 
-      {% for meal in meals %}
-        console.log("blah");
-        meal_data.push({
-          "calories": "{{  meal.calories  }}",
-          "proteins_grams": "{{  meal.grams_of_protein  }}",
-          "fat_grams": "{{  meal.grams_of_fat  }}",
-          "carb_grams": "{{  meal.grams_of_carbs  }}",
-          "date":"{{  meal.date  }}"
-        })
-      {% endfor %}
-      console.log(meal_data);
+        // pull data from querysets into arrays
+        {% for meal in meals %}
+          meal_data.push({
+            "calories": "{{  meal.calories  }}",
+            "protein_grams": "{{  meal.grams_of_protein  }}",
+            "fat_grams": "{{  meal.grams_of_fat  }}",
+            "carb_grams": "{{  meal.grams_of_carbs  }}",
+            "date":"{{  meal.date  }}"
+          })
+        {% endfor %}
 
-      // map from a date to a the number of calories eaten in that day
-      var dateToCalories = new Map();
-      meal_data.forEach(function(meal){
-        if(dateToCalories.has(meal.date)){
-          dateToCalories.set(meal.date, dateToCalories.get(meal.date) + meal.calories);
-        }
-        else{
-          dateToCalories.set(meal.date, meal.calories);
-        }
-      });
+        {%  for workout in workouts  %}
+          workout_data.push({
+            "exercise_name": "{{  workout.exercise_name  }}",
+            "sets": "{{  workout.sets  }}",
+            "reps": "{{  workout.reps  }}",
+            "weight": "{{  workout.weight  }}",
+            "sets_attempted": "{{  workout.sets_successful  }}",
+            "date": "{{  workout.date  }}"
+          })
+          {% endfor %}
 
-      // sort map by date
-      dateToCalories = new Map([...dateToCalories.entries()].sort((a, b)=>{
-        var date1 = new Date(a);
-        var date2 = new Date(b);
-        return a > b;
-      }));
+          {% for cardio in cardios %}
+            cardio_data.push({
+              "type": "{{  cardio.type  }}",
+              "date": "{{  cardio.date  }}",
+              "duration": "{{  cardio.duration  }}",
+              "distance": "{{  cardio.distance_in_miles  }}"
+            })
+            {% endfor %}
 
-      var calories = [];
-      var dates = [];
-      dates.push("Dates");
-      calories.push("Calories");
+        // map from a date to the fields of interest
+        // var dateToCalories = new Map();
+        // meal_data.forEach(function(meal){
+        //   if(dateToCalories.has(meal.date)){
+        //     dateToCalories.set(meal.date, parseInt(dateToCalories.get(meal.date)) + parseInt(meal.calories));
+        //   }
+        //   else{
+        //     dateToCalories.set(meal.date, parseInt(meal.calories));
+        //   }
+        // });
 
-      dateToCalories.forEach((value, key, map) => {
-          calories.push(value);
-          dates.push(new Date(key));
-      });
+        // takes in an object that has a "date" field and other fields
+        // return an array of maps the aggregates data from each unique date
+        // for example, could take in an array of objects with grams of each
+        // macronutrient and return an array like this
+        // [
+        // map date --> grams of protein on that date,
+        // map date --> grams of fat on that date,
+        // map date --> grams of carbs on that date
+        // ]
 
-      var chart = c3.generate({
-      bindto: '#chart1',
-      data: {
-          x: 'Dates',
-          columns: [
-              dates,
-              calories
-          ]
-      },
-      axis: {
-          x: {
-              type: 'timeseries',
-              tick: {
-                  format: '%Y-%m-%d',
-                  rotate: 90
+        function generateDateMaps(arrayToHoldMaps, arrayOfObjects){
+          for(var i = 0; i < arrayOfObjects.length; i++){
+
+            object = arrayOfObjects[i];
+            var counter = 1;
+
+            for(field in object){
+              // dont do anything if field is not numeric
+              if(isNaN(object[field])){
+                continue;
               }
+
+              // if we haven't made a map for this field, create those now
+              // (this should only run on the first iteration)
+              if(counter > arrayToHoldMaps.length){
+                arrayToHoldMaps.push(new Map());
+              }
+              var map = arrayToHoldMaps[counter - 1];
+              if(map.has(object.date)){
+                map.set(object.date, parseInt(map.get(object.date)) + parseInt(object[field]));
+              }
+              else{
+                map.set(object.date, parseInt(object[field]));
+              }
+              counter ++;
+            }
           }
-      }
+          return arrayToHoldMaps;
+        }
+
+        var dateToNutrition = new Map();
+        for(index in meal_data){
+          var meal = meal_data[index];
+          if(dateToNutrition.has(meal.date)){
+            var dateNutritionObject = dateToNutrition.get(meal.date);
+            dateNutritionObject.calories += parseInt(meal.calories);
+            dateNutritionObject.protein_grams += parseInt(meal.protein_grams);
+            dateNutritionObject.fat_grams += parseInt(meal.fat_grams);
+            dateNutritionObject.carb_grams += parseInt(meal.carb_grams);
+          }
+          else{
+            dateToNutrition.set(meal.date,{
+              'calories': parseInt(meal.calories),
+              'protein_grams': parseInt(meal.protein_grams),
+              'fat_grams': parseInt(meal.fat_grams),
+              'carb_grams': parseInt(meal.carb_grams),
+            })
+          }
+        }
+
+
+
+
+        // var nutritionMapArray = []
+        // var workoutMapArray = []
+        // var dateToCalories = generateDateMaps(nutritionMapArray, meal_data)[0];
+        // var dateToBench = generateDateMaps(workoutMapArray, workout_data)[5];
+
+
+
+        var calories_total = [];
+        var calories_protein = [];
+        var calories_fat = [];
+        var calories_carb = [];
+        var benches = [];
+        var dates = [];
+        calories_total.push("Calories");
+        benches.push("Bench");
+
+
+        dateToNutrition.forEach((value, key, map) => {
+            calories_total.push(value.calories);
+            calories_protein.push(parseInt(value.protein_grams) * 4)
+            calories_fat.push(parseInt(value.fat_grams) * 4)
+            calories_carb.push(parseInt(value.carb_grams) * 4)
+            var date = new Date(key);
+            dates.push(date.getFullYear() + '-' + parseInt(date.getMonth() + 1) + "-" + date.getDate());
+        });
+
+        // var chart = c3.generate({
+        //   bindto: '#chart1',
+        //   data: {
+        //       columns: [
+        //           ['Protein Calories', ...calories_protein],
+        //           ['Carb Calories', ...calories_carb],
+        //           ['Fat Calories', ...calories_fat]
+        //       ],
+        //       type: 'bar',
+        //       axis: {
+        //         x:{
+        //           type: 'category',
+        //           categories: dates
+        //         }
+        //       },
+        //       groups: [
+        //         ['Protein Calories', 'Carb Calories','Fat Calories']
+        //       ]
+        //   },
+        //   grid: {
+        //       y: {
+        //           lines: [{value:0}]
+        //       }
+        //   }
+        // });
+
+  var chart = c3.generate({
+  	bindto: '#chart1',
+    data: {
+      x: 'Dates',
+      xFormat: '%Y-%m-%d',
+      columns: [
+        ['Dates', ...dates],
+        ['Protein Calories', ...calories_protein],
+        ['Carb Calories', ...calories_carb],
+        ['Fat Calories', ...calories_fat]
+      ],
+      type: 'bar',
+      groups: [
+        ['Protein Calories', 'Carb Calories','Fat Calories']
+      ]
+    },
+    axis: {
+     x: {
+       type: 'category',
+        tick: {
+                format: "%Y-%m-%d"
+            }
+     },
+
+   }
   });
+
+
+    // var chart = c3.generate({
+    //     bindto: '#chart1',
+    //     data: {
+    //         x: 'Dates',
+    //         columns: [
+    //       ['Dates', ...dates],
+    //       ['Protein Calories', ...calories_protein],
+    //         ]
+    //     },
+    //     axis: {
+    //         x: {
+    //             type: 'timeseries',
+    //             tick: {
+    //                 format: '%Y-%m-%d',
+    //                 rotate: 90
+    //             },
+    //             label: "Date"
+    //         },
+    //         y:{
+    //           label: "Calories"
+    //         }
+    //     }
+    // });
+
+          // sort map by date
+        // dateToCalories = new Map([...dateToCalories.entries()].sort((a, b)=>{
+        //   var date1 = new Date(a);
+        //   var date2 = new Date(b);
+        //   return a > b;
+        // }));
+
+
+        // dateToCalories.forEach((value, key, map) => {
+        //     calories.push(value);
+        //     dates.push(new Date(key));
+        // });
 </script>
