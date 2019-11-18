@@ -18,37 +18,6 @@
   </div>
 </div>
 
-{% comment %}
-<!-- jumbotrong image -->
-<div class="jumbotron row parallax text-center">
-  <h1 id="parallax-big-text">Elevate Your Game</h1>
-  <div class="text-center btn-container">
-    <a class="btn btn-danger" href="./news.html" role="button">News</a>
-    <a class="btn btn-danger" href="./schedule.html" role="button"
-      >League Standings and Schedule</a
-    >
-    <a class="btn btn-danger" href="./search.html" role="button"
-      >Player Search</a
-    >
-  </div>
-</div>
-{% endcomment %}
-
-<!-- jumbotron image, taken from Jason CSE 204 final project -->
-{% comment %}
-<div class="jumbotron row parallax text-center">
-  <h1 id="parallax-big-text">Take Your Health To The Next Level</h1>
-  <div class="text-center btn-container">
-    <a class="btn" href="/workouts/add">
-      Enter Data
-    </a>
-    <a class="btn" href="/workouts/view">
-      View Your Entries
-    </a>
-    <a class="btn" href="/workouts/visualize">Visualize Results </a>
-  </div>
-  {% endcomment %}
-
   <h3 class="center">Why HealthMe?</h3>
   <div class="container">
     <p class="text-basic">
@@ -60,7 +29,32 @@
     </p>
   </div>
 
+  
+{% comment %} <a id="menu" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">menu</i></a>
+
+<a id="search" class="waves-effect waves-light btn btn-floating red" ><i class="material-icons">search</i></a> {% endcomment %}
+
+  <div class="tap-target" data-target="add">
+      <div class="tap-target-content">
+        <h5>Welcome to HealthMe</h5>
+        <p>To get started, click here to enter some data!</p>
+        <div class="next" onclick="closeAll()">Dismiss</div>
+      </div>
+    </div>
+
+
+
+  <script>
+    window.addEventListener("load", function(){
+      if("{{ first_login }}" == "true"){
+        openDiscovery();
+      }    
+    });
+    
+  </script>
+
   <script>
     $(".parallax").parallax();
   </script>
+
 </div>

@@ -31,6 +31,7 @@
             <th>Reps</th>
             <th>Weight</th>
             <th>Sets Succesful</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +42,7 @@
             <td>{{ workout.reps }}</td>
             <td>{{ workout.weight }}</td>
             <td>{{ workout.sets_successful }}</td>
+            <td>{{ workout.date }}</td>
             <td>
               <a class="waves-effect waves-light btn z-depth-2 delete-button" id="W{{ workout.id  }}">Delete</a>
             </td>
@@ -71,6 +73,7 @@
             <th>Exercise</th>
             <th>Duration</th>
             <th>Distance</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -79,6 +82,7 @@
             <td>{{ cardio.type }}</td>
             <td>{{ cardio.duration }}</td>
             <td>{{ cardio.distance_in_miles }}</td>
+            <td>{{ cardio.date }}</td>
             <td>
               <a class="waves-effect waves-light btn z-depth-2 delete-button" id="C{{ cardio.id  }}">Delete</a>
             </td>
@@ -111,6 +115,7 @@
             <th>Grams of Fat</th>
             <th>Grams of Carbs</th>
             <th>Calories</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -121,6 +126,7 @@
             <td>{{ calorie.grams_of_fat }}</td>
             <td>{{ calorie.grams_of_carbs }}</td>
             <td>{{ calorie.calories }}</td>
+            <td>{{ calorie.date }}</td>
             <td>
                 <a class="waves-effect waves-light btn z-depth-2 delete-button" id="M{{ calorie.id  }}">Delete</a>
             </td>

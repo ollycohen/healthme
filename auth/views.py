@@ -7,6 +7,8 @@ from django.contrib import messages
 # a lot of code for authentication taken from https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
 
 # doing signup in auth instead
+
+
 def signup(request):
 
     if request.user.is_authenticated:
@@ -20,27 +22,24 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
-            # redirect to the page the user wanted to access if there was one
-            if request.GET.get('next') != None:
-                return HttpResponseRedirect(request.GET.get('next'))
-            else:
-                return render(request, 'home/home-authenticated.html', {})
+            return HttpResponseRedirect('/?first_login=true')
         else:
             messages.error(request, "There was an error with your signup form")
     else:
         form = UserCreationForm()
 
     return render(request, 'auth/signup.html', {'form': form})
+
+
 def login(request):
 
     if request.user.is_authenticated:
         return HttpResponseRedirect('/')
-
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/?first_login=false')
         else:
             messages.error(request, "There was an error with your login form")
     else:
