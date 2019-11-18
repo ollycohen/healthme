@@ -6,14 +6,14 @@ from django.contrib import messages
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
-from .forms import WorkoutForm, CardioForm, NutritionForm
-from .models import Cardio, Workout, Nutrition
+from .forms import WorkoutForm, CardioForm, NutritionForm, WeightForm
+from .models import Cardio, Workout, Nutrition, Weight
 
 
 @login_required(login_url='/')
 def add_workout(request):
     context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm(),
-               'nutritionForm': NutritionForm()}
+               'nutritionForm': NutritionForm(), 'weightForm': WeightForm()}
     if request.method == "POST":
         if 'workout' in request.POST:
             form = WorkoutForm(request.POST)
@@ -51,6 +51,19 @@ def add_workout(request):
             else:
                 messages.error(
                     request, "There was an error recording your meal!")
+        if 'wght_entry' in request.POST:
+            form = WeightForm(request.POST)
+            context['weightForm'] = form
+            if form.is_valid():
+                weightEntry = form.save(commit=False)
+                weightEntry.user = request.user
+                weightEntry.save()
+                messages.success(
+                    request, 'Your weight was recorded succesfully!')
+            else:
+                messages.error(
+                    request, "There was an error recording your weight!")
+
     return render(request, 'workouts/addWorkout.html', context)
 
 
@@ -61,8 +74,9 @@ def view_workouts(request):
     cardio_sessions = Cardio.objects.all().filter(user=user)
     workout_sessions = Workout.objects.all().filter(user=user)
     nutrition_sessions = Nutrition.objects.all().filter(user=user)
+    weight_sessions = Weight.objects.all().filter(user=user)
     context = {'workouts': workout_sessions,
-               'cardios': cardio_sessions, 'calories': nutrition_sessions}
+               'cardios': cardio_sessions, 'calories': nutrition_sessions, 'weights': weight_sessions}
     return render(request, 'workouts/viewWorkouts.html', context)
 
 
@@ -104,6 +118,17 @@ def delete_cardio(request, id):
     cardio = Cardio.objects.get(id=id)
     if(cardio.user == request.user):
         cardio.delete()
+        payload = {'success': True}
+    else:
+        payload = {'success': False}
+    return HttpResponse(json.dumps(payload), content_type='application/json')
+
+
+@login_required(login_url='/home')
+def delete_weight(request, id):
+    weight = Weight.objects.get(id=id)
+    if(weight.user == request.user):
+        weight.delete()
         payload = {'success': True}
     else:
         payload = {'success': False}

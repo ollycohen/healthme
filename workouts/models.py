@@ -46,3 +46,9 @@ class Nutrition(models.Model):
     calories = models.PositiveSmallIntegerField()
     date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Weight(models.Model):
+    weight_entry = models.PositiveSmallIntegerField()
+    date = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -3,12 +3,14 @@
 <div class="row">
   <div class="col s12 no-pad">
     <ul class="tabs tabs-fixed-width">
-      <li class="tab col s3"><a href="#test1">Weightlifting</a></li>
-      <li class="tab col s3"><a href="#test2">Cardio</a></li>
-      <li class="tab col s3"><a href="#test3">Nutrition</a></li>
+      <li class="tab col s3"><a href="#weightlifting">Weightlifting</a></li>
+      <li class="tab col s3"><a href="#cardio">Cardio</a></li>
+      <li class="tab col s3"><a href="#nutrition">Nutrition</a></li>
+      <li class="tab col s3"><a href="#weight">Weight</a></li>
+      
     </ul>
   </div>
-  <div id="test1" class="col s12">
+  <div id="weightlifting" class="col s12">
     <h2 class="center">Weightlifting</h2>
     <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
     <div class="col s4 offset-s4 center">
@@ -21,7 +23,7 @@
       </form>
     </div>
   </div>
-  <div id="test2" class="col s12">
+  <div id="cardio" class="col s12">
     <h2 class="center">Cardio</h2>
     <div class="col s4 offset-s4 center">
       <form method="POST" class="workout-form">
@@ -34,13 +36,26 @@
     </div>
   </div>
 
-  <div id="test3" class="col s12">
+  <div id="nutrition" class="col s12">
     <h2 class="center">Nutrition</h2>
     <div class="col s4 offset-s4 center">
       <form method="POST" class="workout-form">
         {% csrf_token %}
         {{ nutritionForm | materializecss }}
         <button type="submit" class="save btn btn-default" name="nutrition">
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="weight" class="col s12">
+    <h2 class="center">Weight</h2>
+    <div class="col s4 offset-s4 center">
+      <form method="POST" class="weight-form">
+        {% csrf_token %}
+        {{ weightForm | materializecss }}
+        <button type="submit" class="save btn btn-default" name="wght_entry">
           Save
         </button>
       </form>

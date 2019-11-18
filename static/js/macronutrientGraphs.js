@@ -113,7 +113,7 @@ function createMacroDonutGraph(calories_carb, calories_fat, calories_protein) {
       type: "donut" //,
     },
     donut: {
-      title: "Macronutrient Breakdown"
+      title: "Average Breakdown"
     }
   });
 }
