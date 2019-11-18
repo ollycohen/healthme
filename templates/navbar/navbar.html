@@ -19,9 +19,16 @@
 	<link rel="stylesheet" href="{% static 'css/materialize.css' %}">
   <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
   <script src="{% static 'js/materialize.js' %}"></script>
-  
+
+  <!-- Materialize icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!-- Custom CSS -->
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <!-- Custom discovery js -->
+  <script src="{% static 'js/discovery.js' %}"></script>
+
 
     <script>
       $(document).ready(function(){
@@ -84,7 +91,7 @@
 {% endif %}
   <nav>
     <div class="nav-wrapper teal darken-3">
-      <a href="#" class="brand-logo">HealthMe</a>
+      <a href="#" class="brand-logo" id="logo">HealthMe</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <!-- only display other options if user is logged in -->
         {% if user.is_authenticated %}
@@ -101,3 +108,9 @@
       </ul>
     </div>
   </nav>
+
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a id="add" class="btn btn-floating btn-large cyan" href="/workouts/add">
+      <i class="material-icons">mode_edit</i>
+    </a>
+  </div>
