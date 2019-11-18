@@ -1,6 +1,12 @@
 from django import forms
 
-from .models import Workout, Cardio, Nutrition
+from .models import Workout, Cardio, Nutrition, Weight
+
+
+class WeightForm(forms.ModelForm):
+    class Meta:
+        model = Weight
+        fields = ('weight_entry', 'date')
 
 
 class WorkoutForm(forms.ModelForm):

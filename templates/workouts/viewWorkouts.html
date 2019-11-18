@@ -2,12 +2,13 @@
 <div class="row">
   <div class="col s12 no-pad">
     <ul class="tabs tabs-fixed-width">
-      <li class="tab col s3"><a href="#test1">Weightlifting</a></li>
-      <li class="tab col s3"><a href="#test2">Cardio</a></li>
-      <li class="tab col s3"><a href="#test3">Nutrition</a></li>
+      <li class="tab col s3"><a href="#weightlifting">Weightlifting</a></li>
+      <li class="tab col s3"><a href="#cardio">Cardio</a></li>
+      <li class="tab col s3"><a href="#nutrition">Nutrition</a></li>
+      <li class="tab col s3"><a href="#weight">Weight</a></li>
     </ul>
   </div>
-  <div id="test1" class="col s12">
+  <div id="weightlifting" class="col s12">
     {% if workouts %}
     <h2 class="center">Weightlifting</h2>
     {% endif %}
@@ -53,7 +54,7 @@
       {% endif %}
     </div>
   </div>
-  <div id="test2" class="col s12">
+  <div id="cardio" class="col s12">
     {% if cardios %}
     <h2 class="center">Cardio</h2>
     {% endif %}
@@ -94,7 +95,7 @@
     </div>
   </div>
 
-  <div id="test3" class="col s12">
+  <div id="nutrition" class="col s12">
     {% if calories %}
     <h2 class="center">Nutrition</h2>
     {% endif %}
@@ -137,6 +138,43 @@
       {% endif %}
     </div>
   </div>
+
+<div id="weight" class="col s12">
+    {% if weights %}
+      <h2 class="center">Weight</h2>
+    {% endif %}
+    <div class="col s8 offset-s2">
+      {% if not weights %}
+      <div class="center">
+        <h1 class="no-data">Enter some weight data to get started!</h1>
+        <a class="waves-effect waves-light btn" href="/workouts/add"
+          >Enter Weight Data</a
+        >
+      </div>
+      {% else %}
+      <table class="responsive-table centered striped">
+        <thead>
+          <tr>
+            <th>Weight</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for weight in weights %}
+          <tr>
+            <td>{{ weight.weight_entry }}</td>
+            <td>{{ weight.date }}</td>
+            <td>
+                <a class="waves-effect waves-light btn z-depth-2 delete-button" id="G{{ weight.id  }}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+</div>
 </div>
 
 <script>
@@ -156,6 +194,9 @@
         break;
       case 'M':
         urlModifierForSource = "meal";
+        break;      
+      case 'G':
+        urlModifierForSource = "weight";
         break;
       default:
         alert("Unrecognized id on the delete element!");
