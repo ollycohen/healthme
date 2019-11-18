@@ -9,8 +9,6 @@ function generateMealGraphs(mealData) {
   var dates = [];
 
   calories_total.push("Calories");
-  console.log("map");
-  console.log(dateToNutrition);
   // extract all this data that each date maps to into an array for each field,
   // with each array having an entry for every date
   dateToNutrition.forEach((value, key, map) => {
@@ -27,11 +25,6 @@ function generateMealGraphs(mealData) {
         date.getDate()
     );
   });
-  alert("boom");
-  alert(dates);
-  alert(calories_carb);
-  console.log("dates " + dates);
-  console.log(calories_carb);
   createMacroBarGraph(dates, calories_carb, calories_fat, calories_protein);
   createMacroDonutGraph(calories_carb, calories_fat, calories_protein);
 }
