@@ -86,8 +86,10 @@ def visualize_data(request):
     cardio = Cardio.objects.all().filter(user=user)
     workouts = Workout.objects.all().filter(user=user)
     meals = Nutrition.objects.all().filter(user=user)
+    weights = Weight.objects.all().filter(user=user).order_by("date")
 
-    context = {'meals': meals, 'workouts': workouts, 'cardios': cardio}
+    context = {'meals': meals, 'workouts': workouts,
+               'cardios': cardio, 'weights': weights}
     return render(request, 'workouts/visualize.html', context)
 
 

@@ -204,7 +204,6 @@
 
     // now we know which endpoint to hit
     var url = "http://{{ request.get_host }}/workouts/delete/" + urlModifierForSource + "/" + id.substring(1);
-    alert("url is " + url);
     $.ajax({
       url: url,  
       type: 'POST', 

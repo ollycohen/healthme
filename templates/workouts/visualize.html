@@ -1,7 +1,6 @@
 {% include "navbar/navbar.html"%} {% load materializecss %} {% load static %}
 
 <h2 class="center">Macronutrient Analysis</h2>
-<script src="{% static 'js/graphs.js' %}"></script>
 
 <!-- use context to generate data at request-->
 
@@ -12,8 +11,15 @@
       <div id="chart1" class="chart_id chart-class"></div>
     </div>
     <div class="col s6">
+      <h5 class="center">Average Macronutrient Breakdown</h5>
       <div id="chart2" class="chart_id chart-class"></div>
     </div>
+  </div>
+  <div class="row">
+      <div class="col s6" id="strength-graph">
+        <h5 class="center">Strength Progress Over Time</h5>
+        <div id="chart" class="chart_id chart-class"></div>
+      </div>
   </div>
 </div>
 
@@ -22,9 +28,9 @@
 <script type="text/javascript">
           // parsing meal data
           var mealData = [];
-          var workout_data = [];
-          var cardio_data = [];
-          
+          var workoutData = [];
+          var weightData = [];
+
           {% for meal in meals %}
             mealData.push({
               "calories": "{{  meal.calories  }}",
@@ -34,7 +40,26 @@
               "date":"{{  meal.date  }}"
             })
           {% endfor %}
-          
+
+          {% for workout in workouts %}
+            workoutData.push({
+              "exercise_name": "{{  workout.exercise_name  }}",
+              "sets": "{{  workout.sets  }}",
+              "reps": "{{  workout.reps  }}",
+              "weight": "{{  workout.weight  }}",
+              "sets_succesful": "{{  workout.sets_successful  }}",
+              "date": "{{  workout.date  }}"
+            })
+          {% endfor %}
+
+          {% for weight in weights %}
+            weightData.push({
+              "weight": "{{ weight.weight_entry }}",
+              "date": "{{ weight.date }}"
+            })
+          {% endfor %}
+
           
           generateMealGraphs(mealData);
+          generateWorkoutGraphs(workoutData);
 </script>
