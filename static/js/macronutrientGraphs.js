@@ -1,6 +1,4 @@
 function generateMealGraphs(mealData) {
-  console.log("mealData: " + mealData);
-
   var dateToNutrition = createNutritionMap(mealData);
   var calories_total = [];
   var calories_protein = [];
@@ -35,9 +33,7 @@ function createNutritionMap(mealData) {
   var dateToNutrition = new Map();
   // map from a date to an object holding all data for the date
   for (index in mealData) {
-    console.log("index: " + index);
     var meal = mealData[index];
-    console.log("meal: " + meal.date);
     if (dateToNutrition.has(meal.date)) {
       var dateNutritionObject = dateToNutrition.get(meal.date);
       dateNutritionObject.calories += parseInt(meal.calories);
@@ -83,7 +79,9 @@ function createMacroBarGraph(
       x: {
         type: "category",
         tick: {
-          format: "%Y-%m-%d"
+          format: "%Y-%m-%d",
+          rotate: 90,
+          multiline: false
         },
         label: {
           text: "Date",
