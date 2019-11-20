@@ -4,3 +4,7 @@ routeTabs = destGetParemeter => {
   }
   $(".tabs").tabs("select", destGetParemeter);
 };
+
+updateTabs = () => {
+  $(".tabs").tabs("updateTabIndicator");
+};
