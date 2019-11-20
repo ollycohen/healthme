@@ -45,11 +45,19 @@
       <script>
   $(document).ready(function(){
 
-    // Initialize materialize data picker
+    // Initialize materialize date picker
     $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
     $('select').formSelect();
 
   });
+  </script>
+
+  <!-- routing for pages with tabs -->
+  <script src="{% static 'js/tabRouter.js' %}" defer></script>
+  <script>
+    $( document ).ready(function() {
+      routeTabs("{{ destinationTab }}")
+    });
   </script>
 
   <!-- fontawesome import -->
@@ -72,7 +80,23 @@
     });
   </script>
 
+  <!-- Initiailize navbar for mobile and fixed action buttons-->
+  <script>
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
   
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+
+  $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });
+        
+        
+  </script>
+
 </head>
 <body>
 {% if messages %}
@@ -95,7 +119,8 @@
 {% endif %}
   <nav>
     <div class="nav-wrapper teal darken-3">
-      <a href="#" class="brand-logo" id="logo">HealthMe</a>
+      <a href="/" class="brand-logo" id="logo">HealthMe</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <!-- only display other options if user is logged in -->
         {% if user.is_authenticated %}
@@ -111,10 +136,51 @@
         {% endif %}
       </ul>
     </div>
-  </nav>
 
-  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a id="add" class="btn btn-floating btn-large cyan" href="/workouts/add">
-      <i class="material-icons">mode_edit</i>
-    </a>
-  </div>
+    <ul class="sidenav" id="mobile-nav">
+      <!-- only display other options if user is logged in -->
+      {% if user.is_authenticated %}
+        <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
+        <li><a href="/workouts/add"><i class="fas fa-dumbbell"></i>Add</a></li>
+        <li><a href="/workouts/view"><i class="fas fa-database"></i>View</a></li>
+        <li><a href="/workouts/visualize"><i class="fas fa-chart-line"></i>Visualize</a></li>
+        <li><a href="/auth/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+      {% else %}
+        <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
+        <li><a href="/auth/login"><i class="far fa-user"></i>Login</a></li>
+        <li><a href="/auth/signup"><i class="fas fa-user-edit"></i>Signup</a></li>
+      {% endif %}
+    </ul>          
+  </nav>
+  {% if user.is_authenticated %}
+    
+    {% comment %}   <a class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip">Hover me!</a>
+ {% endcomment %}
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="fas fa-plus"></i>
+  </a>
+  <ul>
+    <li>
+      <a class="btn-floating red tooltipped" data-position="left" data-tooltip="Record Lift" href="/workouts/add?dest=weightlifting">
+        <i class="fas fa-dumbbell"></i>
+      </a>
+    </li>
+    <li>
+      <a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="Record Cardio" href="/workouts/add?dest=cardio">
+        <i class="fas fa-running"></i>
+      </a>
+    </li>
+    <li>  
+      <a class="btn-floating green tooltipped" data-position="left" data-tooltip="Record Meal" href="/workouts/add?dest=nutrition">
+        <i class="fas fa-utensils"></i>
+      </a>
+    </li>
+    <li>
+      <a class="btn-floating blue tooltipped" data-position="left" data-tooltip="Record Weight Entry" href="/workouts/add?dest=weight">
+        <i class="fas fa-weight"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+  {% endif %}
