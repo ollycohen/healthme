@@ -12,8 +12,9 @@ from .models import Cardio, Workout, Nutrition, Weight
 
 @login_required(login_url='/')
 def add_workout(request):
+    destinationTab = request.GET.get('dest', "destination_not_set")
     context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm(),
-               'nutritionForm': NutritionForm(), 'weightForm': WeightForm()}
+               'nutritionForm': NutritionForm(), 'weightForm': WeightForm(), 'destinationTab': destinationTab}
     if request.method == "POST":
         if 'workout' in request.POST:
             form = WorkoutForm(request.POST)

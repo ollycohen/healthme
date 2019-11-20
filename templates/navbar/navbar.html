@@ -52,6 +52,14 @@
   });
   </script>
 
+  <!-- routing for pages with tabs -->
+  <script src="{% static 'js/tabRouter.js' %}" defer></script>
+  <script>
+    $( document ).ready(function() {
+      routeTabs("{{ destinationTab }}")
+    });
+  </script>
+
   <!-- fontawesome import -->
   <script src="https://kit.fontawesome.com/2e4931c44a.js" crossorigin="anonymous"></script>
 
@@ -154,7 +162,7 @@
   </a>
   <ul>
     <li>
-      <a class="btn-floating red tooltipped" data-position="left" data-tooltip="Record Lift" href="/workouts/add?dest=lift">
+      <a class="btn-floating red tooltipped" data-position="left" data-tooltip="Record Lift" href="/workouts/add?dest=weightlifting">
         <i class="fas fa-dumbbell"></i>
       </a>
     </li>
@@ -164,7 +172,7 @@
       </a>
     </li>
     <li>  
-      <a class="btn-floating green tooltipped" data-position="left" data-tooltip="Record Meal" href="/workouts/add?dest=meal">
+      <a class="btn-floating green tooltipped" data-position="left" data-tooltip="Record Meal" href="/workouts/add?dest=nutrition">
         <i class="fas fa-utensils"></i>
       </a>
     </li>
