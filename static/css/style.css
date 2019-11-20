@@ -88,3 +88,7 @@
 .chart-class {
   /* display: inline; */
 }
+
+#strength-graph .c3-event-rects {
+  display: none !important;
+}
