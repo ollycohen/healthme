@@ -45,6 +45,7 @@ function generateWorkoutGraphs(workoutData) {
     console.log(dateArray);
   }
   var chart = c3.generate({
+    bindto: "#strengthGraph",
     data: {
       xs: xs,
       xFormat: "%Y-%m-%d",
@@ -91,16 +92,41 @@ function generateExerciseMaps(workoutData) {
 function generateWeightGraphs(weightData) {
   var weightArray = [];
   var dateArray = [];
+  console.log(weightData);
   weightData.forEach(weight => {
     weightArray.push(weight.weight);
     dateArray.push(weight.date);
   });
-  var chart = c3.generate({
+  var weightChart = c3.generate({
+    bindto: "#weightChart",
+    bindto: d3.select("#weightChart"),
     data: {
+      x: "Dates",
       columns: [
-        ["data1", 30, 200, 100, 400, 150, 250],
-        ["data2", 50, 20, 10, 40, 15, 25]
-      ]
+        ["Dates", ...dateArray],
+        ["Weight", ...weightArray]
+      ],
+      xFormat: "%Y-%m-%d"
+    },
+    axis: {
+      x: {
+        type: "category",
+        tick: {
+          format: "%Y-%m-%d",
+          rotate: 90,
+          multiline: false
+        },
+        label: {
+          text: "Date",
+          position: "outer-center"
+        }
+      },
+      y: {
+        label: {
+          text: "Weight",
+          position: "outer-middle"
+        }
+      }
     }
   });
 }

@@ -89,6 +89,6 @@
   /* display: inline; */
 }
 
-#strength-graph .c3-event-rects {
+#no-animate .c3-event-rects {
   display: none !important;
 }
