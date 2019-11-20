@@ -45,7 +45,7 @@
       <script>
   $(document).ready(function(){
 
-    // Initialize materialize data picker
+    // Initialize materialize date picker
     $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
     $('select').formSelect();
 
@@ -72,11 +72,20 @@
     });
   </script>
 
-  <!-- Initiailize navbar for mobile -->
+  <!-- Initiailize navbar for mobile and fixed action buttons-->
   <script>
   $(document).ready(function(){
     $('.sidenav').sidenav();
   });
+  
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+
+  $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });
+        
         
   </script>
 
@@ -136,9 +145,34 @@
     </ul>          
   </nav>
   {% if user.is_authenticated %}
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-      <a id="add" class="btn btn-floating btn-large cyan" href="/workouts/add">
-        <i class="material-icons">mode_edit</i>
+    
+    {% comment %}   <a class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip">Hover me!</a>
+ {% endcomment %}
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="fas fa-plus"></i>
+  </a>
+  <ul>
+    <li>
+      <a class="btn-floating red tooltipped" data-position="left" data-tooltip="Record Lift" href="/workouts/add?dest=lift">
+        <i class="fas fa-dumbbell"></i>
       </a>
-    </div>
+    </li>
+    <li>
+      <a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="Record Cardio" href="/workouts/add?dest=cardio">
+        <i class="fas fa-running"></i>
+      </a>
+    </li>
+    <li>  
+      <a class="btn-floating green tooltipped" data-position="left" data-tooltip="Record Meal" href="/workouts/add?dest=meal">
+        <i class="fas fa-utensils"></i>
+      </a>
+    </li>
+    <li>
+      <a class="btn-floating blue tooltipped" data-position="left" data-tooltip="Record Weight Entry" href="/workouts/add?dest=weight">
+        <i class="fas fa-weight"></i>
+      </a>
+    </li>
+  </ul>
+</div>
   {% endif %}
