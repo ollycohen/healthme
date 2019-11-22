@@ -1,9 +1,11 @@
 
 /*Menu Bars Icon. Only displays on mobile */
-#icon {
-  display: none;
- 
+#menu-icon{
+		display: none;
 }
+
+
+
 
 /*Media Query*/
 @media only screen and (max-width:991px) {
@@ -19,9 +21,30 @@
 		margin-top: 35%;
 	}
 
-	#nav-mobile{
-
+	.nav-minus-menu {
+		display: none;
 	}
+
+	.nav-minus-menu.responsive{
+		float: none;
+    	display: block;
+    	text-align: left;
+	}
+
+	#menu-icon{
+		display: block;
+	}
+
+	#menu-icon-responsive{
+		position: absolute;
+    	right: 0;
+    	top: 0;
+	}
+
+	#menu-icon:hover{
+		background-color: rgb(191, 191, 191, .3);
+	}
+
 
 
 
