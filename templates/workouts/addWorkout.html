@@ -11,7 +11,7 @@
     </ul>
   </div>
   <div id="weightlifting" class="col s12">
-    <h2 class="center">Weightlifting</h2>
+    <h2 class="center">Lifting</h2>
     <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
     <div class="col s4 offset-s4 center">
       <form method="POST" class="workout-form" name="workout">
@@ -39,7 +39,7 @@
   <div id="nutrition" class="col s12">
     <h2 class="center">Nutrition</h2>
     <div class="col s4 offset-s4 center">
-      <form method="POST" class="workout-form">
+      <form method="POST" class="workout-form" id="nutrition-form">
         {% csrf_token %}
         {{ nutritionForm | materializecss }}
         <button type="submit" class="save btn btn-default" name="nutrition">
@@ -62,3 +62,5 @@
     </div>
   </div>
 </div>
+
+<script src="/static/js/nutrition.js"></script>
