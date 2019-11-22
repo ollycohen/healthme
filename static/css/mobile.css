@@ -1,0 +1,33 @@
+
+/*Menu Bars Icon. Only displays on mobile */
+#icon {
+  display: none;
+ 
+}
+
+/*Media Query*/
+@media only screen and (max-width:991px) {
+/*For Tablets and iPhones*/
+
+	.workout-form{
+		margin-top: 70%;
+		transform:scale(1.5);
+	}
+
+	.weight-form{
+		transform:scale(1.5);
+		margin-top: 35%;
+	}
+
+	#nav-mobile{
+
+	}
+
+
+
+
+	.brand-logo{
+		margin-left: -2.5%;
+	}
+
+}
