@@ -43,9 +43,11 @@ def add_workout(request):
             if form.is_valid():
                 nutrition = form.save(commit=False)
                 nutrition.user = request.user
+                nutrition.autofill_macros = form.cleaned_data['autofill_macros']
                 nutrition.calories = form.cleaned_data['grams_of_fat'] * 9 + \
                     form.cleaned_data['grams_of_protein'] * \
                     4 + form.cleaned_data['grams_of_carbs'] * 4
+                print(form.cleaned_data['grams_of_protein'])
                 nutrition.save()
                 messages.success(
                     request, 'Your meal was recorded succesfully!')
