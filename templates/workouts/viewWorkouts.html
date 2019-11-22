@@ -18,7 +18,7 @@
       {% if not workouts %}
       <div class="center">
         <h1 class="no-data">Enter some workout data to get started!</h1>
-        <a class="waves-effect waves-light btn" href="/workouts/add"
+        <a class="waves-effect waves-light btn" href="/workouts/add?dest=workout"
           >Enter Workout</a
         >
       </div>
@@ -62,7 +62,7 @@
       {% if not cardios %}
       <div class="center">
         <h1 class="no-data">Enter some cardio data to get started!</h1>
-        <a class="waves-effect waves-light btn" href="/workouts/add"
+        <a class="waves-effect waves-light btn" href="/workouts/add?dest=cardio"
           >Enter Cardio</a
         >
       </div>
@@ -103,7 +103,7 @@
       {% if not calories %}
       <div class="center">
         <h1 class="no-data">Enter some nutrition data to get started!</h1>
-        <a class="waves-effect waves-light btn" href="/workouts/add"
+        <a class="waves-effect waves-light btn" href="/workouts/add?dest=nutrition"
           >Enter Nutrition Data</a
         >
       </div>
@@ -147,7 +147,7 @@
       {% if not weights %}
       <div class="center">
         <h1 class="no-data">Enter some weight data to get started!</h1>
-        <a class="waves-effect waves-light btn" href="/workouts/add"
+        <a class="waves-effect waves-light btn" href="/workouts/add?dest=weight"
           >Enter Weight Data</a
         >
       </div>
@@ -204,7 +204,6 @@
 
     // now we know which endpoint to hit
     var url = "http://{{ request.get_host }}/workouts/delete/" + urlModifierForSource + "/" + id.substring(1);
-    alert("url is " + url);
     $.ajax({
       url: url,  
       type: 'POST', 

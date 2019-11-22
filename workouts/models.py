@@ -53,3 +53,6 @@ class Weight(models.Model):
     weight_entry = models.PositiveSmallIntegerField()
     date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['date']

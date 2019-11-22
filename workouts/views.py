@@ -12,8 +12,9 @@ from .models import Cardio, Workout, Nutrition, Weight
 
 @login_required(login_url='/')
 def add_workout(request):
+    destinationTab = request.GET.get('dest', "destination_not_set")
     context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm(),
-               'nutritionForm': NutritionForm(), 'weightForm': WeightForm()}
+               'nutritionForm': NutritionForm(), 'weightForm': WeightForm(), 'destinationTab': destinationTab}
     if request.method == "POST":
         if 'workout' in request.POST:
             form = WorkoutForm(request.POST)
@@ -86,8 +87,10 @@ def visualize_data(request):
     cardio = Cardio.objects.all().filter(user=user)
     workouts = Workout.objects.all().filter(user=user)
     meals = Nutrition.objects.all().filter(user=user)
+    weights = Weight.objects.all().filter(user=user).order_by("date")
 
-    context = {'meals': meals, 'workouts': workouts, 'cardios': cardio}
+    context = {'meals': meals, 'workouts': workouts,
+               'cardios': cardio, 'weights': weights}
     return render(request, 'workouts/visualize.html', context)
 
 
