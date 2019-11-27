@@ -14,7 +14,7 @@
   <div id="weightlifting" class="col s12">
     <h2 class="center">Weightlifting</h2>
     <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
-    <div class="col s4 offset-s4 center">
+    <div class="col s4 offset-s4 center" id="workout-fields">
       <form method="POST" class="workout-form" name="workout">
         {% csrf_token %}
         {{ workoutForm | materializecss }}
@@ -26,7 +26,7 @@
   </div>
   <div id="cardio" class="col s12">
     <h2 class="center">Cardio</h2>
-    <div class="col s4 offset-s4 center">
+    <div class="col s4 offset-s4 center" id="cardio-fields">
       <form method="POST" class="workout-form">
         {% csrf_token %}
         {{ cardioForm | materializecss }}
@@ -39,7 +39,7 @@
 
   <div id="nutrition" class="col s12">
     <h2 class="center">Nutrition</h2>
-    <div class="col s4 offset-s4 center">
+    <div class="col s4 offset-s4 center" id="nutrition-fields">
       <form method="POST" class="workout-form">
         {% csrf_token %}
         {{ nutritionForm | materializecss }}
@@ -52,7 +52,7 @@
 
   <div id="weight" class="col s12">
     <h2 class="center">Weight</h2>
-    <div class="col s4 offset-s4 center">
+    <div class="col s4 offset-s4 center" id="weight-fields">
       <form method="POST" class="weight-form">
         {% csrf_token %}
         {{ weightForm | materializecss }}

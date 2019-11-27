@@ -1,56 +1,211 @@
 
 /*Menu Bars Icon. Only displays on mobile */
-#menu-icon{
+.icon{
 		display: none;
 }
 
+.listitem.responsive {
+		display: none;
+}
+
+#nav-mobile{
+	overflow:hidden;
+	height: 100%;
+}
+
+.listitem{
+	  float: left;
+	  display: block;
+	  text-align: center;
+	  padding-bottom: 14px;
+	  padding-left: 14px;
+}
+
+#listitem-5{
+	padding-right: 14px;
+}
+
+.icon{
+	padding-right: 15px;
+}
 
 
 
 /*Media Query*/
 @media only screen and (max-width:991px) {
-/*For Tablets and iPhones*/
+/*For Tablets*/
 
+	/* addWorkout */
 	.workout-form{
 		margin-top: 70%;
-		transform:scale(1.5);
+		transform:scale(1.25);
 	}
 
-	.weight-form{
-		transform:scale(1.5);
-		margin-top: 35%;
+	#workout-fields{
+		margin-top: -15%; 
 	}
 
-	.nav-minus-menu {
+	/* viewWorkouts */
+
+	#nutrition{
+		transform:scale(1.5);
+		margin-top: 25%;
+	}
+
+	#nutrition-fields{
+		margin-top: -15%; 
+	}
+
+	#weightlifting{
+		margin-top: 20%;
+		transform: scale(1.4);
+	}
+
+	#cardio{
+		margin-top: 20%;
+		transform: scale(1.4);
+	}
+
+	#cardio-fields{
+		margin-top: -15%;
+	}
+
+	#weight-fields{
+		margin-top: -5%;
+	}
+
+	#weight{
+		transform:scale(1.8);
+		margin-top: 20%;
+	}
+
+	/* Responsive menu */
+	.listitem {
 		display: none;
 	}
-
-	.nav-minus-menu.responsive{
+	
+	.listitem-responsive{
 		float: none;
-    	display: block;
-    	text-align: left;
+		display: inline-block;
+		padding-right: 15px;
+		margin-top: 13%;
+		margin-bottom: -10%;
+
 	}
 
-	#menu-icon{
+	#nav-mobile{
+		background-color: teal;
+		width: 100%;
+		text-align: right;
+		height: auto;
+	}
+
+	/* visualize */
+
+	#strength-graph-div{
+		width:100%;
+	}
+
+	#macro-average{
+		width: 100%;
+	}
+
+	#macro-by-day{
+		width:100%;
+	}
+
+	/* Before the menu icon is tapped */
+	.icon{
+		padding-right: 15px;
+		padding-top: 15px;
+		padding-left: 15px;
 		display: block;
 	}
 
-	#menu-icon-responsive{
+	/* Before the menu icon is tapped */
+	.icon-responsive{
+		padding-right: 15px;
+		padding-top: 15px;
+		padding-left: 15px;
 		position: absolute;
-    	right: 0;
-    	top: 0;
+		right: 0;
+		top: 0;
 	}
 
 	#menu-icon:hover{
 		background-color: rgb(191, 191, 191, .3);
 	}
 
-
-
-
-
 	.brand-logo{
 		margin-left: -2.5%;
 	}
+}
+
+
+
+/*Media Query*/
+@media only screen and (max-width:600px) {
+/*For Phones*/
+
+	.workout-form{
+		margin-top: 40%;
+		transform:scale(1);
+		width: 140px;
+		margin-left: -20px;
+	}
+
+	#workout-fields{
+		margin-top: -15%; 
+	}
+
+	#nutrition{
+		transform:scale(1);
+		margin-top: 0%;
+	}
+
+	#nutrition-fields{
+		margin-top: -15%; 
+	}
+
+	#weightlifting{
+		margin-top: 0%;
+		transform: scale(1);
+	}
+
+	#cardio{
+		margin-top: 0%;
+		transform: scale(1);
+	}
+
+	#cardio-fields{
+		margin-top: -15%;
+	}
+
+	#weight-fields{
+		margin-top: -5%;
+	}
+
+	#weight{
+		transform:scale(1);
+		margin-top: 0%;
+	}
+
+	.listitem-responsive{
+			float: none;
+			display: block;
+			padding-right: 15px;
+			margin-top: 0%;
+			margin-bottom: -10%;
+	}
+
+	#listitem-1{
+		margin-top: 15%;
+	}
+
+	#listitem-5{
+		padding-bottom: 5%;
+	}
+
+
 
 }
