@@ -89,18 +89,52 @@ function generateExerciseMaps(workoutData) {
 }
 
 function generateWeightGraphs(weightData) {
+  console.log("generating weight graph");
   var weightArray = [];
-  var dateArray = [];
+  var dates = [];
   weightData.forEach(weight => {
     weightArray.push(weight.weight);
-    dateArray.push(weight.date);
+    date = new Date(weight.date);
+    dates.push(
+      date.getFullYear() +
+        "-" +
+        parseInt(date.getMonth() + 1) +
+        "-" +
+        date.getDate()
+    );
   });
+  console.log(dates);
   var chart = c3.generate({
+    bindto: "#graph",
     data: {
+      x: "Dates",
+      xFormat: "%Y-%m-%d",
       columns: [
-        ["data1", 30, 200, 100, 400, 150, 250],
-        ["data2", 50, 20, 10, 40, 15, 25]
+        ["Dates", ...dates],
+        ["Weight", ...weightArray]
+        // ["data1", 30, 200, 100, 400, 150, 250],
+        // ["data2", 50, 20, 10, 40, 15, 25]
       ]
+    },
+    axis: {
+      x: {
+        type: "category",
+        tick: {
+          format: "%Y-%m-%d",
+          rotate: 90,
+          multiline: false
+        },
+        label: {
+          text: "Date",
+          position: "outer-center"
+        }
+      },
+      y: {
+        label: {
+          text: "Weight",
+          position: "outer-middle"
+        }
+      }
     }
   });
 }
