@@ -69,7 +69,14 @@
   </div>
   <div class="row" id="weight">
     {% if weights.count >= 5 %}
-      <h1>TODO</h1>
+      <div class="col s6">
+        <h5 class="center">Weight Over Time</h5>
+      <div id="graph" class="chart_id chart-class"></div>
+      </div>
+      <div class="col s6">
+        <h5 class="center">Average Weight by Week</h5>
+      <div id="chart6" class="chart_id chart-class"></div>
+    </div>
     {% else %}
       <div class="center col s8 offset-s2">
         <h1 class="no-data">Enter at least 5 weight data entries to get started!</h1>
@@ -121,4 +128,5 @@
           
           generateMealGraphs(mealData);
           generateWorkoutGraphs(workoutData);
+          generateWeightGraphs(weightData)
 </script>

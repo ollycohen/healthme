@@ -92,7 +92,7 @@
   });
   
   $(document).ready(function(){
-    $('.fixed-action-btn').floatingActionButton();
+    $('.fixed-action-btn').floatingActionButton({hoverEnabled: false});
   });
 
   $(document).ready(function(){
@@ -172,7 +172,7 @@
     {% comment %}   <a class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip">Hover me!</a>
  {% endcomment %}
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large red">
+  <a id="add" class="btn-floating btn-large red">
     <i class="fas fa-plus"></i>
   </a>
   <ul>
