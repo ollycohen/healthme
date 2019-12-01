@@ -25,5 +25,22 @@ class CardioForm(forms.ModelForm):
 class NutritionForm(forms.ModelForm):
     class Meta:
         model = Nutrition
-        fields = ('food_name', 'grams_of_fat',
+        fields = ('food_name', 'autofill_macros', 'grams_of_fat',
                   'grams_of_protein', 'grams_of_carbs', 'date')
+        widgets = {
+            'food_name': forms.TextInput(attrs={
+                'id': 'recipe-query'
+            }),
+            'autofill_macros': forms.CheckboxInput(attrs={
+                'id': 'should-query'
+            }),
+            'grams_of_fat': forms.TextInput(attrs={
+                'id': 'fat-query'
+            }),
+            'grams_of_protein': forms.TextInput(attrs={
+                'id': 'protein-query'
+            }),
+            'grams_of_carbs': forms.TextInput(attrs={
+                'id': 'carbs-query'
+            })
+        }

@@ -12,8 +12,9 @@ from .models import Cardio, Workout, Nutrition, Weight
 
 @login_required(login_url='/')
 def add_workout(request):
+    destinationTab = request.GET.get('dest', "destination_not_set")
     context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm(),
-               'nutritionForm': NutritionForm(), 'weightForm': WeightForm()}
+               'nutritionForm': NutritionForm(), 'weightForm': WeightForm(), 'destinationTab': destinationTab}
     if request.method == "POST":
         if 'workout' in request.POST:
             form = WorkoutForm(request.POST)
@@ -42,9 +43,11 @@ def add_workout(request):
             if form.is_valid():
                 nutrition = form.save(commit=False)
                 nutrition.user = request.user
+                nutrition.autofill_macros = form.cleaned_data['autofill_macros']
                 nutrition.calories = form.cleaned_data['grams_of_fat'] * 9 + \
                     form.cleaned_data['grams_of_protein'] * \
                     4 + form.cleaned_data['grams_of_carbs'] * 4
+                print(form.cleaned_data['grams_of_protein'])
                 nutrition.save()
                 messages.success(
                     request, 'Your meal was recorded succesfully!')
