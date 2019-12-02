@@ -1,8 +1,8 @@
 {% include "navbar/navbar.html"%}
 
 <div class="row">
-  <div class="col s4 offset-s4">
-        <h2>Sign up</h2>
+  <div class="col s8 offset-s2 s">
+        <h2 class="sign-up-header">Sign up</h2>
         <p>Already have an account? <a href="/auth/login">Login here!</a></p>
         <form method="post">
             {% csrf_token %}

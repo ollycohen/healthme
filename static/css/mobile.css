@@ -136,9 +136,7 @@
 		background-color: rgb(191, 191, 191, .3);
 	}
 
-	.brand-logo{
-		margin-left: -2.5%;
-	}
+	
 }
 
 
@@ -146,6 +144,39 @@
 /*Media Query*/
 @media only screen and (max-width:600px) {
 /*For Phones*/
+
+	/*Sign Up */
+	.sign-up-header{
+		text-align: center;
+	}
+
+	/* Home Page */
+	#parallax-big-text{
+		font-size: 40px !important;
+		height: 45%;
+		color: #eddbc2 !important;
+	}
+
+
+	.btn-container{
+		margin-top: 20px;
+		text-align: center !important;
+	}
+
+	#visualize-btn{
+		font-size: 12px;
+	}
+
+	#record-btn{
+		font-size: 12px;
+	}
+
+	#view-btn{
+		font-size: 12px;
+	}
+
+	.parallax-container{
+	}
 
 	.workout-form{
 		margin-top: 40%;
@@ -206,6 +237,6 @@
 		padding-bottom: 5%;
 	}
 
-
+	
 
 }
