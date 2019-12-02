@@ -22,6 +22,9 @@
 }
 
 
+.menu-bar{
+  float:right;
+}
 
 .home-column {
   font-size: 1.1em;
