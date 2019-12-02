@@ -124,32 +124,26 @@
 {% endif %}
   <nav>
     <div class="nav-wrapper teal darken-3">
-<<<<<<< HEAD
-      <a href="#" class="brand-logo" id="logo">HealthMe</a>
-      <div id="nav-mobile" class="right teal darken-3">
-=======
-      <a href="/" class="brand-logo" id="logo">HealthMe</a>
-        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
->>>>>>> 43466c14c907aef940e5aba3cde780bab4fd6da1
-        <!-- only display other options if user is logged in -->
-        {% if user.is_authenticated %}
-          <a href="/" id="listitem-1" class="listitem"><i class="fas fa-home"></i>Home</a>
-          <a href="/workouts/add" id="listitem-2" class="listitem"><i class="fas fa-dumbbell"></i>Add</a>
-          <a href="/workouts/view" id="listitem-3" class="listitem"><i class="fas fa-database"></i>View</a>
-          <a href="/workouts/visualize" id="listitem-4" class="listitem"><i class="fas fa-chart-line"></i>Visualize</a>
-          <a href="/auth/logout" id="listitem-5" class="listitem"><i class="fas fa-sign-out-alt"></i>Logout</a>
-          <a href="javascript:void(0);"id="menu-icon" class= "icon" onclick="showMenu();dropMenuItems()"><i class="fa fa-bars" aria-hidden="true"></i></a>
 
-        {% else %}
-         <div class="nav-minus-menu">
-          <li><a href="/" id="listitem-6" class="listitem"><i class="fas fa-home"></i>Home</a></li>
-          <li><a href="/auth/login" id="listitem-7" class="listitem"><i class="far fa-user"></i>Login</a></li>
-          <li><a href="/auth/signup" id="listitem-8" class="listitem"><i class="fas fa-user-edit"></i>Signup</a></li>
-         </div>
-          <li><a href="javascript:void(0);" class="icon" id="menu-icon" onclick="showMenu();dropMenuItems()"><i class="fa fa-bars"></i></a></li>
-        {% endif %}
-      </div>
+      <a href="#" class="brand-logo" id="logo">HealthMe</a>
+        <div class="menu-bar">
+          <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <!-- only display other options if user is logged in -->
+          {% if user.is_authenticated %}
+            <a href="/" id="listitem-1" class="listitem"><i class="fas fa-home"></i>Home</a>
+            <a href="/workouts/add" id="listitem-2" class="listitem"><i class="fas fa-dumbbell"></i>Add</a>
+            <a href="/workouts/view" id="listitem-3" class="listitem"><i class="fas fa-database"></i>View</a>
+            <a href="/workouts/visualize" id="listitem-4" class="listitem"><i class="fas fa-chart-line"></i>Visualize</a>
+            <a href="/auth/logout" id="listitem-5" class="listitem"><i class="fas fa-sign-out-alt"></i>Logout</a>
+          <!--  <a href="javascript:void(0);"id="menu-icon" class= "icon" onclick="showMenu();dropMenuItems()"><i class="fa fa-bars" aria-hidden="true"></i></a> -->
+
+          {% else %}
+            <a href="/" id="listitem-6" class="listitem"><i class="fas fa-home"></i>Home</a>
+            <a href="/auth/login" id="listitem-7" class="listitem"><i class="far fa-user"></i>Login</a>
+            <a href="/auth/signup" id="listitem-8" class="listitem"><i class="fas fa-user-edit"></i>Signup</a>
+           <!--  <a href="javascript:void(0);" class="icon" id="menu-icon" onclick="showMenu();dropMenuItems()"><i class="fa fa-bars"></i></a> -->
+          {% endif %}
+        </div>
     </div>
 
     <ul class="sidenav" id="mobile-nav">
