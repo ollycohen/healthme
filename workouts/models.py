@@ -7,7 +7,7 @@ class Workout(models.Model):
     exercise_name = models.CharField(max_length=50)
     sets = models.PositiveSmallIntegerField()
     reps = models.PositiveSmallIntegerField()
-    weight = models.PositiveSmallIntegerField()
+    weight_in_pounds = models.PositiveSmallIntegerField()
     sets_successful = models.PositiveSmallIntegerField()
     date = models.DateField()
 
@@ -31,7 +31,7 @@ class Cardio(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     type = models.CharField(choices=TYPES, max_length=15)
-    duration = models.PositiveSmallIntegerField()
+    duration_in_minutes = models.PositiveSmallIntegerField()
     distance_in_miles = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __str__(self):
