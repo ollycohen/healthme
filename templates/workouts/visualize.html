@@ -11,6 +11,7 @@
     </div>
   </div>
   </div>
+  {% comment %} nutrition visualizations {% endcomment %}
   <div class="row" id="nutrition">
     {% if meals.count >= 5 %}
     <div class="col s6">
@@ -30,6 +31,7 @@
       </div>    
     {% endif %}
   </div>
+  {% comment %} strength visualizations {% endcomment %}
   <div class="row" id="weightlifting">
     {% if weights.count >= 5 %}
     <div class="col s6" id="strength-graph">
@@ -45,6 +47,7 @@
       </div>
       {% endif %}
   </div>
+  {% comment %} cardio visualizations {% endcomment %}
   <div class="row" id="cardio">
     {% if cardios.count >= 5 %}
       <h1>TODO</h1>
@@ -57,16 +60,13 @@
       </div>
       {% endif %}
   </div>
+  {% comment %} weight tracking visualizations {% endcomment %}
   <div class="row" id="weight">
     {% if weights.count >= 5 %}
-      <div class="col s6">
+      <div class="col s12">
         <h5 class="center">Weight Over Time</h5>
       <div id="graph" class="chart_id chart-class"></div>
       </div>
-      <div class="col s6">
-        <h5 class="center">Average Weight by Week</h5>
-      <div id="chart6" class="chart_id chart-class"></div>
-    </div>
     {% else %}
       <div class="center col s8 offset-s2">
         <h1 class="no-data">Enter at least 5 weight data entries to get started!</h1>
