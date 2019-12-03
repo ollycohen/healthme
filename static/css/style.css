@@ -92,3 +92,8 @@
 #strength-graph .c3-event-rects {
   display: none !important;
 }
+
+.bold {
+  font-weight: bold;
+  margin-top: 30px;
+}
