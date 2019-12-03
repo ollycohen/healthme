@@ -34,7 +34,6 @@
   {% comment %} strength visualizations {% endcomment %}
   <div class="row" id="weightlifting">
     {% if workouts.count >= 5 %}
-    <h1>{{workouts.count}}
     <div class="col s6" id="strength-graph">
       <h5 class="center">Strength Progress Over Time</h5>
       <div id="chart" class="chart_id chart-class"></div>
@@ -98,7 +97,6 @@
           {% endfor %}
 
           {% for workout in workouts %}
-            console.log("{{workout}}");
             workoutData.push({
               "exercise_name": "{{  workout.exercise_name  }}",
               "sets": "{{  workout.sets  }}",
@@ -116,7 +114,6 @@
             })
           {% endfor %}
 
-          console.log(workoutData);
           generateMealGraphs(mealData);
           generateWorkoutGraphs(workoutData);
           generateWeightGraphs(weightData)
