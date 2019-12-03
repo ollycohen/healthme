@@ -49,16 +49,18 @@
   </div>
   {% comment %} cardio visualizations {% endcomment %}
   <div class="row" id="cardio">
-    {% if cardios.count >= 5 %}
-      <h1>TODO</h1>
-    {% else %}
+    {% comment %} {% if cardios.count >= 5 %} {% endcomment %}
+      <div class="col s12" id="cardio-distance">
+        <div id="cardioDistance" class="chart_id chart-class"></div>
+      </div>
+    {% comment %} {% else %}
       <div class="center col s8 offset-s2">
         <h1 class="no-data">Enter at least 5 cardio data entries to get started!</h1>
         <a class="waves-effect waves-light btn" href="/workouts/add?dest=cardio"
           >Enter Cardio Data</a
         >
       </div>
-      {% endif %}
+      {% endif %} {% endcomment %}
   </div>
   {% comment %} weight tracking visualizations {% endcomment %}
   <div class="row" id="weight">
@@ -81,10 +83,11 @@
 <!-- req workouts, nutrition, cardio + display their components-->
 
 <script type="text/javascript">
-          // parsing meal data
+
           var mealData = [];
           var workoutData = [];
           var weightData = [];
+          var cardioData = [];
 
           {% for meal in meals %}
             mealData.push({
@@ -114,8 +117,18 @@
             })
           {% endfor %}
 
+          {% for cardio in cardios %}
+            cardioData.push({
+              "type": "{{ cardio.type }}",
+              "duration": "{{ cardio.duration }}",
+              "distance": "{{ cardio.distance_in_miles }}",
+              "date": "{{  cardio.date  }}"
+            })
+            {% endfor %}
+
           generateMealGraphs(mealData);
           generateWorkoutGraphs(workoutData);
           generateWeightGraphs(weightData)
+          generateCardioGraphs(cardioData);
 </script>
 {% include "navbar/footer.html"%}

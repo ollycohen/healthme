@@ -13,13 +13,13 @@ class WorkoutForm(forms.ModelForm):
     class Meta:
         model = Workout
         fields = ('exercise_name', 'sets', 'reps',
-                  'weight', 'sets_successful', 'date')
+                  'weight_in_pounds', 'sets_successful', 'date')
 
 
 class CardioForm(forms.ModelForm):
     class Meta:
         model = Cardio
-        fields = ('type', 'duration', 'distance_in_miles', 'date')
+        fields = ('type', 'duration_in_minutes', 'distance_in_miles', 'date')
 
 
 class NutritionForm(forms.ModelForm):
