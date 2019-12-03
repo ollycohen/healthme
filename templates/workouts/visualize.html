@@ -104,7 +104,7 @@
               "exercise_name": "{{  workout.exercise_name  }}",
               "sets": "{{  workout.sets  }}",
               "reps": "{{  workout.reps  }}",
-              "weight": "{{  workout.weight  }}",
+              "weight": "{{  workout.weight_in_pounds  }}",
               "sets_succesful": "{{  workout.sets_successful  }}",
               "date": "{{  workout.date  }}"
             })
@@ -120,7 +120,7 @@
           {% for cardio in cardios %}
             cardioData.push({
               "type": "{{ cardio.type }}",
-              "duration": "{{ cardio.duration }}",
+              "duration": "{{ cardio.duration_in_minutes }}",
               "distance": "{{ cardio.distance_in_miles }}",
               "date": "{{  cardio.date  }}"
             })
