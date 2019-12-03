@@ -56,7 +56,7 @@ def add_workout(request):
                     request, "There was an error recording your meal!")
         if 'wght_entry' in request.POST:
             form = WeightForm(request.POST)
-            context['weightForm'] = form
+            # context['weightForm'] = form
             if form.is_valid():
                 weightEntry = form.save(commit=False)
                 weightEntry.user = request.user
