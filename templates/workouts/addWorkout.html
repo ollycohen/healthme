@@ -10,8 +10,10 @@
       
     </ul>
   </div>
+  {% comment %} weightlifting addition {% endcomment %}
   <div id="weightlifting" class="col s12">
     <h2 class="center">Lifting</h2>
+    {% comment %} <p class="muted center">Don't see the exercise you want? Add one here!</p> {% endcomment %}
     <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
     <div class="col s4 offset-s4 center">
       <form method="POST" class="workout-form" name="workout">
@@ -64,3 +66,4 @@
 </div>
 
 <script src="/static/js/nutrition.js"></script>
+{% include "navbar/footer.html"%}

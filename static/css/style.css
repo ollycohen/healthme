@@ -22,7 +22,7 @@
 }
 
 .home-column {
-  font-size: 1.1em;
+  font-size: 1.3em;
   font-family: tahoma sans-serif;
   margin-bottom: 0;
   text-align: justify;
@@ -91,4 +91,9 @@
 
 #strength-graph .c3-event-rects {
   display: none !important;
+}
+
+.bold {
+  font-weight: bold;
+  margin-top: 30px;
 }
