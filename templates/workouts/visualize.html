@@ -49,18 +49,18 @@
   </div>
   {% comment %} cardio visualizations {% endcomment %}
   <div class="row" id="cardio">
-    {% comment %} {% if cardios.count >= 5 %} {% endcomment %}
+    {% if cardios.count >= 5 %}
       <div class="col s12" id="cardio-distance">
         <div id="cardioDistance" class="chart_id chart-class"></div>
       </div>
-    {% comment %} {% else %}
+    {% else %}
       <div class="center col s8 offset-s2">
         <h1 class="no-data">Enter at least 5 cardio data entries to get started!</h1>
         <a class="waves-effect waves-light btn" href="/workouts/add?dest=cardio"
           >Enter Cardio Data</a
         >
       </div>
-      {% endif %} {% endcomment %}
+      {% endif %} 
   </div>
   {% comment %} weight tracking visualizations {% endcomment %}
   <div class="row" id="weight">
