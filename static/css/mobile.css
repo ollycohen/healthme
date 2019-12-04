@@ -1,0 +1,42 @@
+/* Mobile CSS */
+
+/*Media Query*/
+@media only screen and (max-width:991px){
+/* For Tablets */
+	.btn-container{
+		width: 250px;
+		margin-top: 50px;
+		text-align: center;
+	}
+
+	
+
+} 
+
+
+
+
+/*Media Query*/
+@media only screen and (max-width: 599px){
+
+	#parallax-big-text{
+		width: 350px;
+		font-size: 52px;
+	}
+
+	#workout-form{
+
+	}
+
+	.no-data{
+		font-size: 50px;
+	}
+
+
+
+
+	.page-footer{
+
+	}
+
+}
