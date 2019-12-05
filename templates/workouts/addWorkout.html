@@ -44,9 +44,23 @@
       <form method="POST" class="workout-form" id="nutrition-form">
         {% csrf_token %}
         {{ nutritionForm | materializecss }}
+        {% comment %} <div id="progress-shift-down"></div> {% endcomment %}
         <button type="submit" class="save btn btn-default" name="nutrition">
           Save
         </button>
+                  <div class="preloader-wrapper big active start-hidden">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   </div>
