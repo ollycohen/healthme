@@ -71,6 +71,15 @@ function query_macros() {
           $("#id_grams_of_carbs").val(0);
           $("#id_grams_of_fat").val(0);
           $("#id_grams_of_protein").val(0);
+          $("#id_grams_of_carbs")
+            .siblings("label")
+            .addClass("active");
+          $("#id_grams_of_fat")
+            .siblings("label")
+            .addClass("active");
+          $("#id_grams_of_protein")
+            .siblings("label")
+            .addClass("active");
           return;
         }
 
