@@ -64,27 +64,8 @@ function query_macros(){
                     error : function(xhr, errmsg, err){
                         console.log("error")
                     }
-                }
-                )
-
-
-                if(json.results[0]){
-                    var carb_count = json.results[0].carbs ? Math.round(json.results[0].carbs) : 0;
-                    var protein_count = json.results[0].protein ? Math.round(json.results[0].protein) : 0;
-                    var fat_count = json.results[0].fat ? Math.round(json.results[0].fat) : 0;
-
-                    console.log(carb_count)
-                    $('#id_grams_of_carbs').val(carb_count); 
-                    $('#id_grams_of_fat').val(fat_count); 
-                    $('#id_grams_of_protein').val(protein_count); 
-
-                    $('#id_grams_of_carbs').siblings("label").addClass("active")
-                    $('#id_grams_of_fat').siblings("label").addClass("active")
-                    $('#id_grams_of_protein').siblings("label").addClass("active")
-
-                }
-            },
-            
+                });
+        },
             error : function(xhr, errmsg, err){
                 console.log(xhr.status + ": " + xhr.responseText);
             }
