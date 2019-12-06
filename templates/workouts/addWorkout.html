@@ -40,15 +40,7 @@
 
   <div id="nutrition" class="col s12">
     <h2 class="center">Nutrition</h2>
-    <div class="col m4 offset-m4 s6 offset-s3 center">
-      <form method="POST" class="workout-form" id="nutrition-form">
-        {% csrf_token %}
-        {{ nutritionForm | materializecss }}
-        {% comment %} <div id="progress-shift-down"></div> {% endcomment %}
-        <button type="submit" class="save btn btn-default" name="nutrition">
-          Save
-        </button>
-                  <div class="preloader-wrapper big active start-hidden">
+    <div class="preloader-wrapper big active start-hidden">
           <div class="spinner-layer spinner-blue-only">
             <div class="circle-clipper left">
               <div class="circle"></div>
@@ -61,6 +53,14 @@
             </div>
           </div>
         </div>
+    <div class="col m4 offset-m4 s6 offset-s3 center">
+      <form method="POST" class="workout-form" id="nutrition-form">
+        {% csrf_token %}
+        {{ nutritionForm | materializecss }}
+        {% comment %} <div id="progress-shift-down"></div> {% endcomment %}
+        <button type="submit" class="save btn btn-default" name="nutrition">
+          Save
+        </button>
       </form>
     </div>
   </div>

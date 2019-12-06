@@ -41,7 +41,8 @@ function query_macros() {
         var inputFormElements = $("#nutrition-form")[0].children;
         // first 3 children are the food name field and checkbox for autofilling macros
         for (var i = 3, element; (element = inputFormElements[i++]); ) {
-          $(element).hide();
+          //   $(element).hide();
+          $(element).css("visibility", "hidden");
         }
         // show spinner
         $(".start-hidden").css("visibility", "visible");
@@ -52,7 +53,7 @@ function query_macros() {
         var inputFormElements = $("#nutrition-form")[0].children;
         // first 3 children are the food name field and checkbox for autofilling macros
         for (var i = 3, element; (element = inputFormElements[i++]); ) {
-          $(element).show();
+          $(element).css("visibility", "visible");
         }
         // show spinner
         $(".start-hidden").css("visibility", "hidden");
@@ -102,9 +103,6 @@ function query_macros() {
           dataType: "json",
 
           success: function(json) {
-            console.log(json);
-            console.log("UPDATED");
-
             var carb_count = 0;
             var protein_count = 0;
             var fat_count = 0;
@@ -121,7 +119,6 @@ function query_macros() {
             if (json.fat) {
               fat_count = parseInt(json.fat.substring(0, json.fat.length - 1));
             }
-
             console.log(carb_count);
             $("#id_grams_of_carbs").val(carb_count);
             $("#id_grams_of_fat").val(fat_count);
@@ -142,7 +139,6 @@ function query_macros() {
             console.log(xhr.status + ": " + xhr.responseText);
           }
         });
-
         console.log(json);
         console.log("UPDATED");
         if (json.results[0]) {
