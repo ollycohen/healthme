@@ -12,21 +12,25 @@ $('#id_autofill_macros').on('change', function(evenet){
 function query_macros(){
     if($('#id_food_name').val() && $('#id_autofill_macros').prop("checked")){
         var ingredParam = encodeURI($('#id_food_name').val())
-
-
+        var ingredParams = $('#id_food_name').val()
+        var url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search"
+        console.log(ingredParam)
 
         $.ajax({
-            url: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search",
+            url: url,
             headers: {
                 'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-                'X-RapidAPI-Key': 'adf5f496e3msh6d36ddf1155e6e2p113747jsnca35354e5b7e',
-                'Access-Control-Allow-Origin': '*'
+                'X-RapidAPI-Key': 'adf5f496e3msh6d36ddf1155e6e2p113747jsnca35354e5b7e'
             },
-            data: {query: ingredParam},
+            data: {query: ingredParams, number: "10"},
             type: "GET",
-            dataType: "json",
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
 
             success : function(json){
+                console.log(json)
+
+
                 var id = json.results[0].id
                 var urlNutrition =  'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/' + id + '/nutritionWidget.json'
 
@@ -34,51 +38,36 @@ function query_macros(){
                     url: urlNutrition,
                     headers: {
                         'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-                        'X-RapidAPI-Key': 'adf5f496e3msh6d36ddf1155e6e2p113747jsnca35354e5b7e',
-                        'Access-Control-Allow-Origin': '*'
+                        'X-RapidAPI-Key': 'adf5f496e3msh6d36ddf1155e6e2p113747jsnca35354e5b7e'
                     },
                     type: "GET",
-                    dataType: "json",
-        
+                    dataType: 'JSON',
+                    contentType: 'application/json; charset=utf-8',
                     success : function(json){
-                
-                        console.log(json);
-                        console.log("UPDATED")
-              
-                            var carb_count = 0 
-                            var protein_count = 0
-                            var fat_count = 0
-                            if(json.carbs){
-                                carb_count = parseInt(json.carbs.substring(0, json.carbs.length-1))
-                            }
-                            if(json.carbs){
-                                protein_count = parseInt(json.protein.substring(0, json.protein.length-1))
-                            }
-                            if(json.fat){
-                                fat_count = parseInt(json.fat.substring(0, json.fat.length-1))
-                            }
-                           
-        
-                            console.log(carb_count)
-                            $('#id_grams_of_carbs').val(carb_count); 
-                            $('#id_grams_of_fat').val(fat_count); 
-                            $('#id_grams_of_protein').val(protein_count); 
-        
-                            $('#id_grams_of_carbs').siblings("label").addClass("active")
-                            $('#id_grams_of_fat').siblings("label").addClass("active")
-                            $('#id_grams_of_protein').siblings("label").addClass("active")
-        
-                        
+                        var carb_count = json.carbs
+                        carb_count = carb_count.substring(0, carb_count.length-1)
+
+                        var fat_count = json.fat
+                        fat_count = fat_count.substring(0, fat_count.length-1)
+
+                        var protein_count = json.protein
+                        protein_count = protein_count.substring(0, protein_count.length-1)
+
+                        $('#id_grams_of_carbs').val(carb_count); 
+                        $('#id_grams_of_fat').val(fat_count); 
+                        $('#id_grams_of_protein').val(protein_count); 
+    
+                        $('#id_grams_of_carbs').siblings("label").addClass("active")
+                        $('#id_grams_of_fat').siblings("label").addClass("active")
+                        $('#id_grams_of_protein').siblings("label").addClass("active")
                     },
-                    
                     error : function(xhr, errmsg, err){
-                        console.log(xhr.status + ": " + xhr.responseText);
+                        console.log("error")
                     }
-                });
+                }
+                )
 
 
-                console.log(json);
-                console.log("UPDATED")
                 if(json.results[0]){
                     var carb_count = json.results[0].carbs ? Math.round(json.results[0].carbs) : 0;
                     var protein_count = json.results[0].protein ? Math.round(json.results[0].protein) : 0;
