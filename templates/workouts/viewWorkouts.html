@@ -13,7 +13,7 @@
     <h2 class="center">Weightlifting</h2>
     {% endif %}
     <!-- form logic taken from https://tutorial.djangogirls.org/en/django_forms/ -->
-    <div class="col s8 offset-s2">
+    <div class="col m8 offset-m2 s12">
       <!-- only display table if there is data -->
       {% if not workouts %}
       <div class="center">
@@ -24,7 +24,7 @@
       </div>
 
       {% else %}
-      <table class="responsive-table centered striped">
+      <table class="responsive-table centered striped weightlifting-table">
         <thead>
           <tr>
             <th>Exercise</th>
@@ -58,7 +58,7 @@
     {% if cardios %}
     <h2 class="center">Cardio</h2>
     {% endif %}
-    <div class="col s8 offset-s2">
+    <div class="col m8 offset-m2 s12">
       {% if not cardios %}
       <div class="center">
         <h1 class="no-data">Enter some cardio data to get started!</h1>
@@ -99,7 +99,7 @@
     {% if calories %}
     <h2 class="center">Nutrition</h2>
     {% endif %}
-    <div class="col s8 offset-s2">
+    <div class="col m8 offset-m2 s12">
       {% if not calories %}
       <div class="center">
         <h1 class="no-data">Enter some nutrition data to get started!</h1>
@@ -143,7 +143,7 @@
     {% if weights %}
       <h2 class="center">Weight</h2>
     {% endif %}
-    <div class="col s8 offset-s2">
+    <div class="col m8 offset-m2 s9 offset-s2">
       {% if not weights %}
       <div class="center">
         <h1 class="no-data">Enter some weight data to get started!</h1>
@@ -152,7 +152,7 @@
         >
       </div>
       {% else %}
-      <table class="responsive-table centered striped">
+      <table class="centered striped">
         <thead>
           <tr>
             <th>Weight</th>

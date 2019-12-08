@@ -1,5 +1,18 @@
 /* Mobile CSS */
 
+/* Only Display on mobile */ 
+.view-workout-img{
+		display: none;
+}
+
+.add-workout-img{
+		display: none;
+}
+
+.make-account-img{
+		display: none;
+}
+
 /*Media Query*/
 @media only screen and (max-width:991px){
 /* For Tablets */
@@ -33,10 +46,68 @@
 	}
 
 
-
+	.weightlifting-table{
+		width:300px;
+	}
 
 	.page-footer{
 
+	}
+
+	.text-basic{
+		  font-size: 1.3em;
+		  font-family: tahoma sans-serif;
+		  margin-bottom: 0;
+		  text-align: justify;
+		  color: #6c5b7b;
+		  padding: 30px;
+	}
+
+	.brand-logo{
+		margin-left: 0px;
+	}
+
+	.subhead-home{
+			font-size: 1.5em;
+	}
+
+	.view-workout-img{
+		display: block;
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: 10%;
+		padding-bottom: 10%;
+	}
+
+	.add-workout-img{
+		display: block;
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: 10%;
+		padding-bottom: 10%;
+	}
+
+	.home-column{
+		display:none;
+	}
+
+	.make-account-img{
+		display: block;
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: 10%;
+		padding-bottom: 10%;
+	}
+
+	.btns{
+		padding-bottom: 10%; 
+	}
+
+	.topic{
+		color: #364d01;
 	}
 
 }
