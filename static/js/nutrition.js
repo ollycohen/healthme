@@ -1,46 +1,71 @@
-$('#recipe-query').on('blur', function(event){
+$('#id_food_name').on('blur', function(event){
     event.preventDefault();
     console.log("blur")
     query_macros();
 });
 
-$('#should-query').on('change', function(evenet){
-    console.log($('#should-query').val())
+$('#id_autofill_macros').on('change', function(evenet){
+    console.log($('#id_autofill_macros').val())
     query_macros();
 });
 
 function query_macros(){
-    if($('#recipe-query').val() && $('#should-query').prop("checked")){
-        var dataStr =  "app_id=ae4df3dc&app_key=88a35cbdea8755c723a9da95d2b83171&ingr="
-        var ingredParam = encodeURI($('#recipe-query').val())
-        dataStr = dataStr + ingredParam
+    if($('#id_food_name').val() && $('#id_autofill_macros').prop("checked")){
+        var ingredParam = encodeURI($('#id_food_name').val())
+        var ingredParams = $('#id_food_name').val()
+        var url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search"
+        console.log(ingredParam)
 
         $.ajax({
-            url: "https://api.edamam.com/api/nutrition-data",
-            data: dataStr,
+            url: url,
+            headers: {
+                'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+                'X-RapidAPI-Key': 'adf5f496e3msh6d36ddf1155e6e2p113747jsnca35354e5b7e'
+            },
+            data: {query: ingredParams, number: "10"},
             type: "GET",
-            dataType: "json",
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
 
             success : function(json){
-                console.log(json);
-                console.log("UPDATED")
-                if(json.totalNutrients){
-                    var carb_count = json.totalNutrients.CHOCDF ? Math.round(json.totalNutrients.CHOCDF.quantity) : 0;
-                    var protein_count = json.totalNutrients.PROCNT ? Math.round(json.totalNutrients.PROCNT.quantity) : 0;
-                    var fat_count = json.totalNutrients.FAT ? Math.round(json.totalNutrients.FAT.quantity) : 0;
+                console.log(json)
 
-                    console.log(carb_count)
-                    $('#carbs-query').val(carb_count); 
-                    $('#fat-query').val(fat_count); 
-                    $('#protein-query').val(protein_count); 
 
-                    $('#carbs-query').siblings("label").addClass("active")
-                    $('#fat-query').siblings("label").addClass("active")
-                    $('#protein-query').siblings("label").addClass("active")
+                var id = json.results[0].id
+                var urlNutrition =  'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/' + id + '/nutritionWidget.json'
 
-                }
-            },
-            
+                $.ajax({
+                    url: urlNutrition,
+                    headers: {
+                        'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+                        'X-RapidAPI-Key': 'adf5f496e3msh6d36ddf1155e6e2p113747jsnca35354e5b7e'
+                    },
+                    type: "GET",
+                    dataType: 'JSON',
+                    contentType: 'application/json; charset=utf-8',
+                    success : function(json){
+                        var carb_count = json.carbs
+                        carb_count = carb_count.substring(0, carb_count.length-1)
+
+                        var fat_count = json.fat
+                        fat_count = fat_count.substring(0, fat_count.length-1)
+
+                        var protein_count = json.protein
+                        protein_count = protein_count.substring(0, protein_count.length-1)
+
+                        $('#id_grams_of_carbs').val(carb_count); 
+                        $('#id_grams_of_fat').val(fat_count); 
+                        $('#id_grams_of_protein').val(protein_count); 
+    
+                        $('#id_grams_of_carbs').siblings("label").addClass("active")
+                        $('#id_grams_of_fat').siblings("label").addClass("active")
+                        $('#id_grams_of_protein').siblings("label").addClass("active")
+                    },
+                    error : function(xhr, errmsg, err){
+                        console.log("error")
+                    }
+                });
+        },
             error : function(xhr, errmsg, err){
                 console.log(xhr.status + ": " + xhr.responseText);
             }

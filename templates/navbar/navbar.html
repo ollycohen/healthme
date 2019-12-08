@@ -67,8 +67,7 @@
   </script>
 
   <!-- fontawesome import -->
-  <script src="https://kit.fontawesome.com/2e4931c44a.js" crossorigin="anonymous"></script>
-
+  <script src="{% static 'js/font-awesome-kit.js' %}"></script>
   <!-- setting csrf token for use in delete form, code taken from https://docs.djangoproject.com/en/2.2/ref/csrf/#setting-the-token-on-the-ajax-request -->
   {% csrf_token %}
   <script type="text/javascript">
