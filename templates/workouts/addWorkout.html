@@ -7,7 +7,8 @@
       <li class="tab col s3"><a href="#cardio">Cardio</a></li>
       <li class="tab col s3"><a href="#nutrition">Nutrition</a></li>
       <li class="tab col s3"><a href="#weight">Weight</a></li>
-      
+      <li class="tab col s3"><a href="#sleep">Sleep</a></li>
+
     </ul>
   </div>
   {% comment %} weightlifting addition {% endcomment %}
@@ -77,7 +78,23 @@
       </form>
     </div>
   </div>
+
+  <div id="sleep" class="col s12">
+    <h2 class="center">Sleep</h2>
+    <div class="col m4 offset-m4 s6 offset-s3 center">
+      <form method="POST" class="sleep-form">
+        {% csrf_token %}
+        {{ sleepForm | materializecss }}
+        <button type="submit" class="save btn btn-default" name="sleep">
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
+
+
+
 
 <script src="/static/js/nutrition.js"></script>
 {% include "navbar/footer.html"%}

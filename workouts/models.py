@@ -48,6 +48,12 @@ class Nutrition(models.Model):
     date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+class Sleep(models.Model):
+    food_name = models.CharField(max_length=50)
+    duration_in_minutes = models.PositiveSmallIntegerField()
+    date = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 class Weight(models.Model):
     weight_entry = models.PositiveSmallIntegerField()

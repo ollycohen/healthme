@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Workout, Cardio, Nutrition, Weight
+from .models import Workout, Cardio, Nutrition, Weight, Sleep
 
 
 class WeightForm(forms.ModelForm):
@@ -15,6 +15,10 @@ class WorkoutForm(forms.ModelForm):
         fields = ('exercise_name', 'sets', 'reps',
                   'weight_in_pounds', 'sets_successful', 'date')
 
+class SleepForm(forms.ModelForm):
+    class Meta:
+        model = Sleep
+        fields = ('duration_in_minutes', 'date')
 
 class CardioForm(forms.ModelForm):
     class Meta:

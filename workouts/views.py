@@ -6,15 +6,15 @@ from django.contrib import messages
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
-from .forms import WorkoutForm, CardioForm, NutritionForm, WeightForm
-from .models import Cardio, Workout, Nutrition, Weight
+from .forms import WorkoutForm, CardioForm, NutritionForm, WeightForm, SleepForm
+from .models import Cardio, Workout, Nutrition, Weight, Sleep
 
 
 @login_required(login_url='/')
 def add_workout(request):
     destinationTab = request.GET.get('dest', "destination_not_set")
     context = {'workoutForm': WorkoutForm(), 'cardioForm': CardioForm(),
-               'nutritionForm': NutritionForm(), 'weightForm': WeightForm(), 'destinationTab': destinationTab}
+               'nutritionForm': NutritionForm(), 'weightForm': WeightForm(), 'sleepForm': SleepForm(), 'destinationTab': destinationTab}
     if request.method == "POST":
         if 'workout' in request.POST:
             form = WorkoutForm(request.POST)
@@ -66,6 +66,18 @@ def add_workout(request):
             else:
                 messages.error(
                     request, "There was an error recording your weight!")
+        if 'sleep' in request.POST:
+            form = SleepForm(request.POST)
+            # context['weightForm'] = form
+            if form.is_valid():
+                sleep = form.save(commit=False)
+                sleep.user = request.user
+                sleep.save()
+                messages.success(
+                    request, 'Your sleep was recorded succesfully!')
+            else:
+                messages.error(
+                    request, "There was an error recording your sleep!")
 
     return render(request, 'workouts/addWorkout.html', context)
 
